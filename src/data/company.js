@@ -12,7 +12,7 @@ export const company = {
   founder: 'Mohammed Rayhan',
   founderRole: 'Founder & CEO',
   email: 'hello@naazailabs.com',
-  emailShort: 'ray@naazailabs.com',
+  emailShort: 'hello@naazailabs.com',
   location: 'JP Nagar, Bengaluru',
   region: 'Karnataka, India',
   hours: 'Mon–Sat · 10am–7pm IST',

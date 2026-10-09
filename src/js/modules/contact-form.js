@@ -40,7 +40,7 @@ export default function contactForm(form) {
       status.textContent = "Thanks — we'll reply within one business day.";
       status.classList.add('is-success');
     } catch (error) {
-      status.textContent = error.message || 'Could not send your message. Please email us directly.';
+      status.textContent = error.message || 'Could not send your message. Please email us directly at hello@naazailabs.com.';
       status.classList.add('is-error');
       submitBtn?.removeAttribute('disabled');
     }

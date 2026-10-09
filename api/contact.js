@@ -60,7 +60,7 @@ export default async function handler(req, res) {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO_EMAIL } = process.env;
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
     console.error('[contact] missing SMTP configuration');
-    const message = 'The mail server is not configured yet. Please email us directly.';
+    const message = 'The mail server is not configured yet. Please email us directly at hello@naazailabs.com.';
     return json
       ? res.status(500).json({ error: message })
       : redirect(res, '/contact.html?error=1');
@@ -103,10 +103,12 @@ export default async function handler(req, res) {
     <p>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>
   `;
 
+  const recipientEmail = CONTACT_TO_EMAIL || 'hello@naazailabs.com';
+
   try {
     await transporter.sendMail({
       from: `"Naaz AI Labs website" <${SMTP_USER}>`,
-      to: CONTACT_TO_EMAIL || SMTP_USER,
+      to: recipientEmail,
       replyTo: `${data.name} <${data.email}>`,
       subject: `New enquiry from ${data.name}${data.company ? ` (${data.company})` : ''}`,
       text,
@@ -114,7 +116,7 @@ export default async function handler(req, res) {
     });
   } catch (error) {
     console.error('[contact] send failed', error);
-    const message = 'Could not send your message. Please email us directly.';
+    const message = 'Could not send your message. Please email us directly at hello@naazailabs.com.';
     return json
       ? res.status(502).json({ error: message })
       : redirect(res, '/contact.html?error=1');
