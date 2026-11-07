@@ -14,7 +14,7 @@ import { stopScroll, startScroll } from '../core/scroll.js';
  */
 
 const SESSION_KEY = 'naaz:intro-seen';
-const MIN_VISIBLE_MS = 900;
+const MIN_VISIBLE_MS = 700;
 
 export function initLoader() {
   const loader = document.querySelector('[data-loader]');
@@ -54,11 +54,11 @@ export function initLoader() {
   document.fonts?.ready.then(() => advance(65));
   window.addEventListener('load', () => advance(100));
   // Failsafe: a hung third-party request must not hold the page hostage.
-  const failsafe = setTimeout(() => advance(100), 4000);
+  const failsafe = setTimeout(() => advance(100), 1000);
 
   function tick() {
     // Ease toward target so the number always moves, even between signals.
-    displayed += Math.max((target - displayed) * 0.08, target > displayed ? 0.35 : 0);
+    displayed += Math.max((target - displayed) * 0.2, target > displayed ? 1.2 : 0);
     const shown = Math.min(Math.round(displayed), 100);
 
     if (countEl) countEl.textContent = String(shown).padStart(3, '0');

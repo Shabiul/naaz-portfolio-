@@ -9,54 +9,54 @@
 export const processSteps = [
   {
     title: 'Discovery',
-    text: 'We start with your business, not your website. What you sell, who decides, and where the current process leaks time or revenue.',
+    text: 'Your business first: what you sell, and where it leaks.',
   },
   {
     title: 'Research',
-    text: 'Your market, your competitors, and how customers in your industry actually behave when they are ready to buy.',
+    text: 'Your market, competitors and buyers.',
   },
   {
     title: 'Business Analysis',
-    text: 'The commercial model translated into requirements — what the system must do, and what it must never get wrong.',
+    text: 'The model turned into requirements.',
   },
   {
     title: 'Wireframes',
-    text: 'The shape of every screen, agreed before a single line of code exists. Cheap to change here, expensive to change later.',
+    text: 'Every screen, agreed before code.',
   },
   {
     title: 'UX Design',
-    text: 'Flows, states, and edge cases. The unglamorous work that separates software people tolerate from software people trust.',
+    text: 'Flows, states and edge cases.',
   },
   {
     title: 'UI Design',
-    text: 'The visual system: typography, colour, motion, and every component in every state, documented.',
+    text: 'Type, colour, motion, every component.',
   },
   {
     title: 'Prototype',
-    text: 'A clickable build you can put in front of real users before we commit engineering time to it.',
+    text: 'A clickable build, tested on real users.',
   },
   {
     title: 'Frontend',
-    text: 'Built to the design system, accessible by default, and fast on the devices your customers actually own.',
+    text: 'Fast, accessible, built to the design system.',
   },
   {
     title: 'Backend',
-    text: 'APIs, data models, integrations, and the AI layer — architected to scale past the launch.',
+    text: 'APIs, data, integrations and the AI layer.',
   },
   {
     title: 'Testing',
-    text: 'Functional, cross-device, performance, and security. We break it deliberately so your customers never do accidentally.',
+    text: 'We break it so your customers never do.',
   },
   {
     title: 'Deployment',
-    text: 'Zero-downtime release with monitoring, backups, and rollback in place from day one.',
+    text: 'Zero-downtime release, with rollback ready.',
   },
   {
     title: 'Optimisation',
-    text: 'Real usage data drives the first iteration. Conversion, speed, and drop-off, measured and improved.',
+    text: 'Real usage data drives the first iteration.',
   },
   {
     title: 'Support',
-    text: 'Ongoing partnership — maintenance, new capability, and a team that already knows your system.',
+    text: 'Maintenance, new features, a team that knows you.',
   },
 ];

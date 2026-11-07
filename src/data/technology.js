@@ -1,9 +1,10 @@
 /**
  * Technology stack.
  *
- * Glyphs are hand-drawn 24×24 abstractions rather than official brand marks —
- * redrawing a company's logo without licence is a legal problem, and a
- * consistent geometric set reads better in a grid than 23 mismatched logos.
+ * The grid shows each technology's official logo from tech-logos.js. The
+ * hand-drawn 24×24 glyphs below are the fallback for names with no official
+ * mark there (SQL, NoSQL and RVC have none; a few brands aren't in either
+ * logo library) — and kept for all, so dropping a logo never leaves a gap.
  */
 
 const G = {
@@ -30,9 +31,28 @@ const G = {
   aws: '<path d="M4 10c2 2 5 3 8 3s6-1 8-3"/><path d="M3 16c3 2.5 6 3.5 9 3.5s6-1 9-3.5"/><path d="M8 6h8"/>',
   docker: '<path d="M4 13h14a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M7 13V9h3v4M12 13V9h3v4M12 9V5h3v4"/>',
   cloud: '<path d="M7 18h10a3.5 3.5 0 0 0 0-7 5 5 0 0 0-9.6-1.4A3.6 3.6 0 0 0 7 18z"/>',
+  gcp: '<path d="M7 18h10a3.5 3.5 0 0 0 .5-7 5.5 5.5 0 0 0-10.6-1A3.6 3.6 0 0 0 7 18z"/><path d="m12 10 2.4 1.4v2.8L12 15.6l-2.4-1.4v-2.8z"/>',
+  azure: '<path d="M10.5 4 4 19h6.5M13.5 4 20 19H8.5l6.5-4"/>',
+  pytorch: '<path d="M12 3 7.5 7.5a6.4 6.4 0 1 0 9 0"/><circle cx="15.6" cy="6" r=".9"/>',
+  tensorflow: '<path d="M12 3v18l-3.5-2V9.5L4 12V7.5zM12 3l8 4.5V12l-4.5-2.5V21"/>',
+  wave: '<path d="M4 11v2M8 8v8M12 5v14M16 8v8M20 11v2"/>',
+  fastapi: '<circle cx="12" cy="12" r="9"/><path d="m13.5 6-4.5 7h4l-2 5"/>',
+  sql: '<ellipse cx="12" cy="6" rx="7" ry="2.5"/><path d="M5 6v12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6"/><path d="M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/>',
+  nosql: '<path d="M9 4C7 4 7 5.5 7 7s0 3-2 5c2 2 2 3.5 2 5s0 3 2 3M15 4c2 0 2 1.5 2 3s0 3 2 5c-2 2-2 3.5-2 5s0 3-2 3"/>',
+  redis: '<path d="m12 5 8 3-8 3-8-3z"/><path d="m4 12 8 3 8-3M4 16l8 3 8-3"/>',
+  kubernetes: '<path d="m12 3 7 3.4 1.7 7.6-4.8 6H7.1l-4.8-6L4 6.4z"/><circle cx="12" cy="12" r="2.2"/><path d="M12 6.5v3.3M12 14.2v3.3M7.4 10.5l2.5 1M14.1 12.5l2.5 1M14.1 11.5l2.5-1M7.4 13.5l2.5-1"/>',
+  pipeline: '<path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/>',
+  selenium: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8.5 14l2.2 2.2 4.8-4.2"/>',
+  cuda: '<rect x="7" y="7" width="10" height="10" rx="1"/><path d="M10 7V4M14 7V4M10 20v-3M14 20v-3M7 10H4M7 14H4M20 10h-3M20 14h-3"/>',
+  blender: '<circle cx="13" cy="13" r="6"/><circle cx="13" cy="13" r="2.2"/><path d="M3 9h7M5 5l5.5 4"/>',
+  postgres: '<ellipse cx="12" cy="6" rx="7" ry="2.5"/><path d="M5 6v12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6"/><path d="M10 17v-6h2.5a2 2 0 0 1 0 4H10"/>',
+  graphql: '<path d="m12 3 8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 3 4 16.5h16z"/>',
+  hermes: '<circle cx="12" cy="12" r="3"/><path d="M9.4 10.5C6.5 9 4.5 8.6 3 6.5c2.2 0 4.4.8 6.6 2.3M14.6 10.5c2.9-1.5 4.9-1.9 6.4-4-2.2 0-4.4.8-6.6 2.3M12 15v5"/>',
+  crew: '<circle cx="12" cy="6" r="2.2"/><circle cx="6" cy="17" r="2.2"/><circle cx="18" cy="17" r="2.2"/><path d="M10.9 8 7.1 15M13.1 8l3.8 7M8.2 17h7.6"/>',
 };
 
-export const technologies = [
+// Listed in any order here; the page shows them A–Z (sorted at the bottom).
+const list = [
   { name: 'HTML5', category: 'Structure', glyph: G.markup },
   { name: 'CSS3', category: 'Structure', glyph: G.style },
   { name: 'Tailwind', category: 'Structure', glyph: G.utility },
@@ -56,4 +76,26 @@ export const technologies = [
   { name: 'AWS', category: 'Infrastructure', glyph: G.aws },
   { name: 'Docker', category: 'Infrastructure', glyph: G.docker },
   { name: 'Cloudflare', category: 'Infrastructure', glyph: G.cloud },
+  { name: 'GCP', category: 'Infrastructure', glyph: G.gcp },
+  { name: 'Azure', category: 'Infrastructure', glyph: G.azure },
+  { name: 'Kubernetes', category: 'Infrastructure', glyph: G.kubernetes },
+  { name: 'Jenkins', category: 'CI / CD', glyph: G.pipeline },
+  { name: 'Selenium', category: 'Testing', glyph: G.selenium },
+  { name: 'CUDA', category: 'Compute', glyph: G.cuda },
+  { name: 'PyTorch', category: 'Machine learning', glyph: G.pytorch },
+  { name: 'TensorFlow', category: 'Machine learning', glyph: G.tensorflow },
+  { name: 'RVC', category: 'Voice AI', glyph: G.wave },
+  { name: 'Hermes Agents', category: 'Agents', glyph: G.hermes },
+  { name: 'CrewAI', category: 'Agents', glyph: G.crew },
+  { name: 'FastAPI', category: 'Framework', glyph: G.fastapi },
+  { name: 'GraphQL', category: 'API', glyph: G.graphql },
+  { name: 'SQL', category: 'Data', glyph: G.sql },
+  { name: 'PostgreSQL', category: 'Data', glyph: G.postgres },
+  { name: 'NoSQL', category: 'Data', glyph: G.nosql },
+  { name: 'Redis', category: 'Data', glyph: G.redis },
+  { name: 'Blender', category: 'Graphics', glyph: G.blender },
 ];
+
+export const technologies = list
+  .slice()
+  .sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));

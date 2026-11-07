@@ -1,60 +1,77 @@
 /* ============================================================================
-   NAAZ AI LABS — DESIGN TOKENS
+   NAAZ AI LABS — DESIGN TOKENS (brand identity)
    ----------------------------------------------------------------------------
-   The palette is a strict 70 / 25 / 5 ratio:
+   Colour palette (usage ratio 50 / 35 / 10 / 5):
 
-     70%  Ivory       #F8F3E7   the canvas. Default surface of the site.
-     25%  Deep Navy   #0B1F4D   ink, and the cinematic full-bleed moments.
-      5%  Steel Blue  #5E79A8   accent only — never a surface, never body text.
+     Midnight Blue  #101B35   headings, buttons, navigation, footer, dark sections.
+     Light Ivory    #F4EFE4   backgrounds, whitespace, light sections.
+     Steel Blue     #5E79A8   links, icons, buttons, highlights, accents.
+     Espresso       #49352B   secondary text, subtle details, warm accents.
 
-   Every derived value below is generated from those three anchors so the ratio
-   holds no matter how many sections get added later.
+   Fonts: Helvetica (bold & regular) for the brand name, headings, navigation
+   and buttons; Arial for body text, paragraphs, descriptions and form fields;
+   Garamond for the tagline, elegant accents, quotes and subtle details.
+
+   The token names (ivory, navy, steel, espresso) are what every page and
+   component reads, so changing a value here re-colours the whole site.
    ========================================================================== */
 
 @theme {
   /* --- Anchors ----------------------------------------------------------- */
-  --color-ivory: #f8f3e7;
-  --color-navy: #0b1f4d;
+  --color-ivory: #f4efe4;
+  --color-navy: #101b35;
   --color-steel: #5e79a8;
+  --color-espresso: #49352b;
 
-  /* --- Ivory scale (light surfaces, 70%) --------------------------------- */
-  --color-ivory-50: #fdfcf8; /* lifted cards on ivory */
-  --color-ivory-100: #faf7ef;
-  --color-ivory-200: #f8f3e7; /* = base */
-  --color-ivory-300: #efe8d7; /* hairlines, muted fills */
-  --color-ivory-400: #e2d8c1; /* borders on light */
-  --color-ivory-500: #cfc2a5; /* disabled ink on light */
+  /* --- Ivory scale (light surfaces) -------------------------------------- */
+  --color-ivory-50: #fbf8f1; /* lifted cards */
+  --color-ivory-100: #f8f4ea;
+  --color-ivory-200: #f4efe4; /* = base */
+  --color-ivory-300: #e9e2d3; /* hairlines, muted fills */
+  --color-ivory-400: #d9d0bd; /* borders on light */
+  --color-ivory-500: #bcb29d; /* disabled ink on light */
 
-  /* --- Navy scale (ink + dark surfaces, 25%) ----------------------------- */
-  --color-navy-950: #050d20; /* deepest cinematic bg */
-  --color-navy-900: #071531;
-  --color-navy-800: #0b1f4d; /* = base */
-  --color-navy-700: #112a63;
-  --color-navy-600: #18377c;
-  --color-navy-500: #21469a;
+  /* --- Midnight scale (ink + dark surfaces) ------------------------------ */
+  --color-navy-950: #0a1226; /* deepest dark sections */
+  --color-navy-900: #0d1730;
+  --color-navy-800: #101b35; /* = base ink */
+  --color-navy-700: #1a2744;
+  --color-navy-600: #263454;
+  --color-navy-500: #3a4866;
 
-  /* --- Steel scale (accent, 5%) ------------------------------------------ */
-  --color-steel-300: #a8bad6;
-  --color-steel-400: #8298bf;
-  --color-steel-500: #5e79a8; /* = base */
+  /* --- Espresso scale (secondary text, warm accents) --------------------- */
+  --color-espresso-900: #382922;
+  --color-espresso-800: #49352b; /* = base */
+  --color-espresso-700: #5f4a3e;
+  --color-espresso-500: #8a7566;
+
+  /* --- Steel scale (accent) ---------------------------------------------- */
+  --color-steel-300: #c4d0e4;
+  --color-steel-400: #8fa5cb;
+  --color-steel-500: #5e79a8; /* = base accent */
   --color-steel-600: #4a6390;
-  --color-steel-700: #3a4e72;
+  --color-steel-700: #3a4f76;
 
   /* --- Semantic: light context (default) --------------------------------- */
   --color-surface: var(--color-ivory-200);
   --color-surface-raised: var(--color-ivory-50);
   --color-surface-sunken: var(--color-ivory-300);
   --color-ink: var(--color-navy-800);
-  --color-ink-muted: color-mix(in oklab, var(--color-navy-800) 62%, transparent);
+  --color-ink-muted: color-mix(in oklab, var(--color-espresso-800) 86%, transparent);
   --color-ink-faint: color-mix(in oklab, var(--color-navy-800) 38%, transparent);
   --color-line: color-mix(in oklab, var(--color-navy-800) 12%, transparent);
   --color-line-strong: color-mix(in oklab, var(--color-navy-800) 22%, transparent);
   --color-accent: var(--color-steel-500);
 
   /* --- Typography -------------------------------------------------------- */
-  --font-display: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
-  --font-sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  /* Helvetica: brand name, headings, navigation, buttons. Arial: body text,
+     paragraphs, descriptions, form fields. Garamond: tagline, elegant
+     accents, quotes (EB Garamond from Google Fonts, in head.html, where the
+     device has no Garamond of its own). */
+  --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-sans: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-mono: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-serif: Garamond, 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
 
   /* Fluid scale — every step is clamp()ed so nothing reflows badly between
      360px and 1920px. Ratios: 1.2 on mobile widening to ~1.33 on desktop. */
@@ -70,12 +87,13 @@
   --text-label: 0.6875rem;
 
   --tracking-label: 0.16em;
-  --tracking-tight: -0.02em;
-  --tracking-tighter: -0.035em;
+  --tracking-tight: -0.01em;
+  --tracking-tighter: -0.025em;
+  --tracking-brand: 0.22em; /* the brand name: uppercase, letter-spacing 5–7px */
 
   /* --- Space / rhythm ---------------------------------------------------- */
-  --space-section: clamp(5rem, 3rem + 9vw, 11rem);
-  --space-gutter: clamp(1.25rem, 0.6rem + 2.6vw, 3.5rem);
+  --space-section: clamp(7rem, 4rem + 12vw, 16rem);
+  --space-gutter: clamp(1.5rem, 0.8rem + 3.4vw, 5rem);
   --container-max: 84rem;
   --container-text: 44rem;
 

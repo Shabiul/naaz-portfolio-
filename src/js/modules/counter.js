@@ -9,6 +9,9 @@ import { prefersReducedMotion } from '../core/env.js';
  *
  *   <span data-module="counter" data-lazy>250</span>
  *   <span data-module="counter" data-decimals="1">4.9</span>
+ *   <span data-module="counter" data-prefix="₹" data-locale="en-IN">₹1,00,000</span>
+ *
+ * `data-locale` sets the digit grouping (en-IN gives 1,00,000); default en-US.
  */
 
 const DURATION = 1800;
@@ -20,9 +23,10 @@ export default function counter(el) {
   const decimals = Number(el.dataset.decimals ?? 0);
   const prefix = el.dataset.prefix ?? '';
   const suffix = el.dataset.suffix ?? '';
+  const locale = el.dataset.locale ?? 'en-US';
 
   const format = (value) =>
-    `${prefix}${value.toLocaleString('en-US', {
+    `${prefix}${value.toLocaleString(locale, {
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals,
     })}${suffix}`;
@@ -45,7 +49,12 @@ export default function counter(el) {
     const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
     el.textContent = format(target * eased);
     if (t < 1) requestAnimationFrame(frame);
-    else el.textContent = format(target);
+    else {
+      el.textContent = format(target);
+      // The reserved width only matters mid-count; released, the final text
+      // sits at its natural width (a ch is wider than a digit in some fonts).
+      el.style.minWidth = '';
+    }
   }
 
   requestAnimationFrame(frame);

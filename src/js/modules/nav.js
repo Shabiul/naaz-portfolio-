@@ -1,5 +1,5 @@
 import { rafThrottle, clamp } from '../core/env.js';
-import { scrollTo } from '../core/scroll.js';
+import { scrollTo, stopScroll, startScroll } from '../core/scroll.js';
 
 /**
  * Navigation.
@@ -83,10 +83,14 @@ export function initNav() {
       drawer.classList.toggle('is-open', open);
       drawer.toggleAttribute('inert', !open);
       document.body.classList.toggle('is-nav-open', open);
+      // The menu scrolls on its own on short screens; the page behind must not.
+      if (open) stopScroll();
+      else startScroll();
       if (open) nav.classList.remove('is-hidden');
     };
 
     setDrawer(false);
+    drawer.setAttribute('data-lenis-prevent', '');
 
     toggle.addEventListener('click', () => {
       setDrawer(toggle.getAttribute('aria-expanded') !== 'true');
@@ -103,6 +107,12 @@ export function initNav() {
       }
     });
   }
+
+  /* --- Current page in the link bar ------------------------------------- */
+  const here = location.pathname.replace(/\/index\.html$/, '/');
+  nav.querySelectorAll('.v2-nav__links a').forEach((a) => {
+    if (a.getAttribute('href') === here) a.setAttribute('aria-current', 'page');
+  });
 
   /* --- Smooth anchor navigation ------------------------------------------ */
   document.addEventListener('click', (event) => {

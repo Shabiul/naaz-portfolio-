@@ -60,6 +60,7 @@
 
 .loader__count {
   font-family: var(--font-display);
+  font-weight: 700;
   font-size: clamp(3rem, 10vw, 7rem);
   line-height: 0.85;
   font-variant-numeric: tabular-nums;
@@ -85,7 +86,7 @@
 /* The lift: curtain splits upward, revealing the page already composed. */
 .loader.is-done {
   clip-path: inset(0 0 100% 0);
-  transition: clip-path var(--dur-cinematic) var(--ease-out-expo);
+  transition: clip-path 0.6s var(--ease-out-expo);
 }
 
 /* Page content is held at a slight offset until the curtain clears. */

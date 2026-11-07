@@ -25,6 +25,9 @@ export default defineConfig({
   build: {
     target: 'es2022',
     cssMinify: 'lightningcss',
+    // The crystal chunk is Three.js (~545 kB, ~137 kB gzipped). It is loaded
+    // only by services.html, so its size is not paid by any other page.
+    chunkSizeWarningLimit: 600,
     rollupOptions: {
       input: pages,
       output: {

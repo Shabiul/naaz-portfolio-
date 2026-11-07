@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js" data-ui="skeuo">
+<html lang="en" class="no-js">
   <head>
     <!--@include:head-->
     <title>Naaz AI Labs — AI Automation Company in Bangalore</title>
@@ -55,272 +55,235 @@
     <script type="module" src="/src/js/main.js"></script>
   </head>
 
-  <body>
-    <!--@include:loader-->
+  <body class="v2">
+    <!-- Loader: a halftone N assembles while the count climbs; fades into the hero. -->
+    <div class="v2-loader" data-v2-loader aria-hidden="true">
+      <canvas class="v2-loader__mark" data-v2-loader-mark></canvas>
+      <div class="v2-loader__bottom">
+        <div class="v2-loader__lines">
+          <span>Perfection takes a moment<i>...</i></span>
+          <span>Wiring up the systems<i>...</i></span>
+          <span>Brewing your experience<i>...</i></span>
+          <span>Great things take time<i>...</i></span>
+          <span>Worth the wait<i>...</i></span>
+        </div>
+        <span class="v2-loader__count" data-v2-loader-count>0%</span>
+      </div>
+      <div class="v2-loader__bar"><span data-v2-loader-bar></span></div>
+    </div>
+
     <!--@include:nav-->
 
-    <div class="page-enter" data-page>
-      <main id="main">
-        <!-- ================================================================
-             COVER
-             ============================================================= -->
-        <section class="hero grain" data-theme="dark">
-          <div class="robot-stage" data-module="heroRobot" aria-hidden="true"><!--@include:robot--></div>
-          <div class="hero__scrim" aria-hidden="true"></div>
-          <div class="hero__glow" aria-hidden="true"></div>
+    <div class="page-enter is-ready" data-page>
+      <!-- Version 2 home (mdx.so flow, frame for frame). v2-home.js drives the
+           scroll: hero entry, fades, the shrinking pinned showreel, the
+           "We Build" expansion and the section bars. The 3D lives in
+           v2-orb.js (frosted orb) and v2-beam.js (the valley); each has a CSS
+           fallback underneath. -->
+      <main id="main" data-module="v2Home">
+        <!-- 1–2 · STAGE — hero and valley in one pinned scene. Scrolling
+             (v2-home.js writes stage.v2p, 0 → 1) lifts the hero copy away,
+             rolls mist in, breaks the particle sculpture into a cloud of
+             granules, sinks the camera into the valley and lights the beam,
+             fades the valley copy in, then a white cloud rises over it all. -->
+        <section class="v2-stage" data-v2-stage>
+          <div class="v2-stage__valley" data-beam-host>
+            <div class="v2-valley__fallback" aria-hidden="true"></div>
+            <canvas class="v2-canvas" data-module="v2Beam" data-lazy aria-hidden="true"></canvas>
+          </div>
+          <div class="v2-stage__studio" data-v2-studio aria-hidden="true">
+            <div class="v2-hero__floor"></div>
+            <div class="v2-hero__shadow"></div>
+          </div>
+          <div class="v2-stage__sculpture" data-orb-host>
+            <div class="v2-orb-fallback" aria-hidden="true"></div>
+            <canvas class="v2-canvas" data-module="v2Particles" data-lazy aria-hidden="true"></canvas>
+          </div>
+          <div class="v2-stage__mist" data-v2-mist aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
 
-          <div class="shell hero__inner">
-            <p class="eyebrow" data-reveal="fade">Artificial Intelligence R&amp;D</p>
-
-            <h1 class="hero__title" data-module="splitText">
-              Transforming businesses through intelligent automation
-            </h1>
-
-            <p class="hero__sub" data-reveal="up" style="--reveal-delay:420ms">
-              An AI research and development studio in Bengaluru. We build the systems
-              your business runs on — answering in English, Hindi, Kannada, and Tamil,
-              on your WhatsApp, in seven days.
-            </p>
-
-            <div class="hero__actions" data-reveal="up" style="--reveal-delay:560ms">
-              <a class="btn btn--invert btn--lg" href="/solutions.html">
-                Find your industry
-                <span class="btn__arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="btn btn--ghost btn--lg" href="/work.html">
-                See the work
-              </a>
+          <header class="v2-hero" data-v2-hero>
+            <div class="v2-hero__flex">
+              <div class="v2-hero__left">
+                <p class="v2-eyebrow" data-v2-enter><span class="v2-eyebrow__rule" aria-hidden="true"></span>Artificial Intelligence R&amp;D</p>
+                <h1 class="v2-hero__title" data-v2-enter>
+                  <span class="v2-hero__line v2-strong">Transforming businesses</span>
+                  <span class="v2-hero__line">through intelligent automation</span>
+                </h1>
+                <p class="v2-body v2-grey v2-hero__lede" data-v2-enter>
+                  We build the AI systems your business runs on — <span class="v2-ink">live in seven days.</span>
+                </p>
+                <div class="v2-hero__ctas" data-v2-enter>
+                  <a class="v2-cta" href="https://wa.me/919448434344?text=Hi%20Naaz%20AI%20Labs%2C%20I%27d%20like%20a%20quote%20for%20my%20business." target="_blank" rel="noopener noreferrer" data-cta data-track="hero_whatsapp_quote">Get a quote <span class="v2-arrow" aria-hidden="true">→</span></a>
+                  <a class="v2-ghost" href="/solutions.html">Find your industry</a>
+                </div>
+                                              </div>
+              <div class="v2-hero__right">
+                <ol class="v2-index" data-v2-enter aria-label="What we build">
+                  <li><a href="/services.html#build" data-shape="helix"><span>01</span>Artificial Intelligence</a></li>
+                  <li><a href="/services.html#service-crm-development" data-shape="cube"><span>02</span>CRM Systems</a></li>
+                  <li><a href="/services.html#service-workflow-automation" data-shape="sphere"><span>03</span>Automation</a></li>
+                  <li><a href="/services.html#service-website-development" data-shape="n"><span>04</span>Web Development</a></li>
+                </ol>
+              </div>
             </div>
+          </header>
+
+          <div class="v2-valley" data-v2-valley>
+            <p class="v2-valley__tag">2026 / AI SYSTEMS</p>
+            <h2 class="v2-valley__h v2-valley__h--left"><span>Every</span> <span>System</span></h2>
+            <h2 class="v2-valley__h v2-valley__h--right"><span>Begins With</span> <span>a Conversation</span></h2>
+            <a class="v2-valley__pill" href="#lets-talk">Let's talk <span class="v2-arrow" aria-hidden="true">↗</span></a>
           </div>
 
-          <div class="shell hero__rail">
-            <ul class="hero__disciplines">
-              <li class="hero__discipline"><span>01</span> Artificial Intelligence</li>
-              <li class="hero__discipline"><span>02</span> CRM Systems</li>
-              <li class="hero__discipline"><span>03</span> Automation</li>
-              <li class="hero__discipline"><span>04</span> Web Development</li>
-            </ul>
-            <a class="scroll-cue" href="#industries">
-              <span class="scroll-cue__line" aria-hidden="true"></span>
-              Scroll
-            </a>
+          <div class="v2-stage__rise" data-v2-rise aria-hidden="true"></div>
+        </section>
+
+        <!-- 3 · COMMITMENTS — the written guarantees, first thing after the
+             hero, before we ask anyone to pick an industry ---------------- -->
+        <section class="v2-commit" data-bar="2">
+          <div class="v2-commit__head" data-v2-fade>
+            <p class="v2-eyebrow"><span class="v2-eyebrow__rule" aria-hidden="true"></span>What we commit to</p>
+            <h2 class="v2-commit__title">In writing, <span class="v2-grey">on every proposal.</span></h2>
+          </div>
+          <div class="v2-commit__grid">
+            <!--@render:v2Guarantees-->
+          </div>
+                  </section>
+
+        <!-- 4 · INDUSTRIES — Plate 01: route to the right solution --------- -->
+        <section class="v2-ind">
+          <div class="v2-ind__head">
+            <p class="v2-plate">Plate 01 — Industries</p>
+            <h2 class="v2-ind__title">Find your industry</h2>
+            <a class="v2-bubble v2-bubble--dark" href="/solutions.html"><span class="v2-bubble__text">All solutions</span><span class="v2-bubble__arrow" aria-hidden="true">↗</span></a>
+          </div>
+          <div class="v2-ind__grid">
+            <!--@render:v2Industries-->
           </div>
         </section>
 
-        <!-- ================================================================
-             POSITION — one paragraph, oversized. No cards, no icons.
-             ============================================================= -->
-        <section class="section section--tight">
-          <div class="shell grid12">
-            <p class="col-full md:col-3 eyebrow" data-reveal="fade">The position</p>
-            <div class="col-full md:col-8 md:start-5">
-              <p class="display" data-reveal="up" style="max-inline-size:20ch">
-                Most agencies build you a website. We build the
-                <span class="ink"
-                  ><em class="accent-italic">machine behind it</em
-                  ><svg class="ink__line" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true">
-                    <!-- Uneven on purpose: a ruled line reads as a border, this reads as a hand. -->
-                    <path data-draw d="M4 13.5C52 7.5 104 6.2 156 8.4c46 2 78 5.6 140 2.1" />
-                  </svg></span
-                >.
-              </p>
-              <p class="lede" style="margin-block-start:2rem" data-reveal="up">
-                A brochure site is a cost. A system that captures every lead, answers
-                every enquiry, and follows up without being asked is an asset. We only
-                build the second kind, on
-                <a class="link link--accent" href="/technology.html">technology chosen deliberately</a>.
-              </p>
-            </div>
-          </div>
+        <!-- 5 · POSITION — the second block that must stay ------------------ -->
+        <section class="v2-position">
+          <p class="v2-eyebrow" data-v2-fade><span class="v2-eyebrow__rule" aria-hidden="true"></span>The position</p>
+          <h2 class="v2-position__title" data-v2-fade>
+            Most agencies build you a website. We build the <em>machine behind it</em>
+          </h2>
+                    <p class="v2-ask" data-v2-fade>
+            <a class="v2-cta" href="https://wa.me/919448434344?text=Hi%20Naaz%20AI%20Labs%2C%20I%27d%20like%20a%20quote%20for%20my%20business." target="_blank" rel="noopener noreferrer" data-track="position_whatsapp_quote">Get a quote <span class="v2-arrow" aria-hidden="true">→</span></a>
+            <a class="v2-ask__alt" href="/contact.html" data-track="position_contact">or send a brief</a>
+          </p>
         </section>
 
-        <!-- ================================================================
-             INDUSTRY ROUTER — the client's first real decision.
-             This is deliberately the highest section on the page after the
-             cover: a resort owner should reach Resort in one scroll.
-             ============================================================= -->
-        <section class="section section--ruled plate-marks" id="industries">
-          <div class="gridlines" aria-hidden="true"></div>
-          <span class="plate">Plate 01 — Industries</span>
-
-          <div class="shell layer-content">
-            <header class="grid12" style="margin-block-end:clamp(2.5rem, 2rem + 3vw, 4.5rem)">
-              <div class="col-full md:col-6">
-                <p class="eyebrow" data-reveal="fade">Start here</p>
-                <h2 class="title-1" style="margin-block-start:1.25rem" data-reveal="up">
-                  Find your industry.
-                </h2>
-              </div>
-              <p class="col-full md:col-4 md:start-8 lede" data-reveal="up">
-                Eight industries, each with a Standard, Intermediate, and Premium
-                path. Open yours to see exactly what is included — and what it costs
-                you in time and team.
-              </p>
-            </header>
-
-            <div class="ind-index" data-reveal-group>
-              <!--@render:industryIndex-->
-            </div>
-          </div>
-        </section>
-
-        <!-- ================================================================
-             PROOF
-             ============================================================= -->
-        <section class="section">
-          <div class="shell">
-            <div class="grid12" style="align-items:end;margin-block-end:3rem">
-              <div class="col-full md:col-6">
-                <p class="eyebrow" data-reveal="fade">What we commit to</p>
-                <h2 class="title-1" style="margin-block-start:1.25rem" data-reveal="up">
-                  In writing, on every proposal.
-                </h2>
-              </div>
-              <div class="col-full md:col-3 md:start-10" style="text-align:left" data-reveal="up">
-                <a class="link link--accent" href="/work.html">
-                  See the work <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="metrics" data-reveal-group>
-              <!--@render:guarantees-->
+        <!-- 6 · SHOWREEL — grows in from a small card, then pinned; shrinks as
+             the next section slides over it -------------------------------- -->
+        <section class="v2-reel" data-bar="3">
+          <div class="v2-reel__frame" data-v2-reel>
+            <div class="v2-reel__grow" data-v2-reel-grow>
+              <video class="v2-reel__video" autoplay muted loop playsinline preload="metadata" poster="/video/network-poster.jpg" aria-label="Naaz AI Labs showreel">
+                <source src="/video/network.webm" type="video/webm" />
+                <source src="/video/network.mp4" type="video/mp4" />
+              </video>
+              <button class="v2-reel__play" type="button" data-v2-reel-play>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" /></svg>
+                <span class="v2-reel__divider" aria-hidden="true"></span>
+                <span>Watch showreel</span>
+              </button>
             </div>
           </div>
         </section>
 
-        <!-- ================================================================
-             LYNQ — the productised offer. Sits between bespoke industry
-             builds and the capability list, because a client who wants a
-             subscription rather than a project should find it here.
-             ============================================================= -->
-        <section class="section section--ruled plate-marks" data-theme="dark" style="background:var(--color-navy-900)">
-          <!-- Decorative only: the section reads identically without it, so it
-               carries no caption and is hidden from assistive tech. Chrome
-               defers offscreen autoplay, so this costs nothing until scrolled to. -->
-          <video
-            class="section-video"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            poster="/video/network-poster.jpg"
-            aria-hidden="true"
-            tabindex="-1"
-          >
-            <source src="/video/network.webm" type="video/webm" />
-            <source src="/video/network.mp4" type="video/mp4" />
-          </video>
-          <div class="section-scrim" aria-hidden="true"></div>
-
-          <div class="glow" style="inline-size:30rem;block-size:30rem;inset-block-end:-12rem;inset-inline-end:-8rem;--glow-opacity:.3"></div>
-          <span class="plate">Plate 02 — Lynq</span>
-
-          <div class="shell layer-content grid12" style="align-items:center">
-            <div class="col-full md:col-5">
-              <p class="eyebrow" data-reveal="fade">Our product</p>
-              <h2 class="display" style="margin-block-start:1.25rem" data-reveal="up">Lynq</h2>
-              <p class="lede" style="margin-block-start:1.25rem" data-reveal="up">
-                Not every business needs a bespoke build. Lynq is our AI automation
-                platform — an AI workforce on your WhatsApp, website, and phone lines,
-                live on your own number in seven days.
-              </p>
-              <p class="mono-meta" style="margin-block-start:1rem" data-reveal="up">
-                From ₹11,999 / month · No API bills · No lock-in
-              </p>
-              <div class="hero__actions" style="margin-block-start:2rem" data-reveal="up">
-                <a class="btn btn--invert" href="/lynq.html">
-                  Explore Lynq
-                  <span class="btn__arrow" aria-hidden="true">→</span>
-                </a>
-              </div>
+        <!-- 7 · SERVICES — "Built with Intention", then "We Build Systems" -- -->
+        <div class="v2-services" data-v2-services>
+          <div class="v2-services__glow" aria-hidden="true"></div>
+          <div class="v2-services__flex" data-v2-services-head>
+            <h2 class="v2-services__heading">Built with Intention.<br />Made to <span class="v2-strong">Perform.</span></h2>
+                      </div>
+          <section class="v2-build" data-orb-host data-v2-build data-bar="4">
+            <div class="v2-build__sphere">
+              <div class="v2-orb-fallback" aria-hidden="true"></div>
+              <canvas class="v2-canvas" data-module="v2Orb" data-tone="white" data-lazy aria-hidden="true"></canvas>
             </div>
+            <a class="v2-float v2-float--1" href="/services.html#build" data-v2-float><span class="v2-float__in">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2" /><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" /></svg>AI Agents</span></a>
+            <a class="v2-float v2-float--2" href="/services.html#service-crm-development" data-v2-float><span class="v2-float__in">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M4 12h6M4 17h10" /><circle cx="18" cy="7" r="2" /><circle cx="14" cy="12" r="2" /><circle cx="18" cy="17" r="2" /></svg>CRM</span></a>
+            <a class="v2-float v2-float--3" href="/services.html#service-workflow-automation" data-v2-float><span class="v2-float__in">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3" /><path d="M18 3v4h-4M6 21v-4h4" /></svg>Automation</span></a>
+            <a class="v2-float v2-float--4" href="/services.html#service-website-development" data-v2-float><span class="v2-float__in">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="13" rx="2" /><path d="M8 21h8M12 17.5V21" /></svg>Websites</span></a>
+            <div class="v2-build__copy" data-v2-build-copy>
+              <h2 class="v2-build__title">We Build <span class="v2-strong">Systems</span> That Breathe</h2>
+              <p class="v2-body">Because systems that last aren't made by chance — <span class="v2-grey">they're shaped with purpose.</span></p>
+            </div>
+          </section>
+        </div>
 
-            <ol class="col-full md:col-6 md:start-7 workflow" data-reveal-group>
-              <li class="workflow__step" data-reveal="right" data-reveal-item>
-                <span class="workflow__node" aria-hidden="true">01</span>
-                <h3 class="workflow__title">A lead messages you</h3>
-                <p class="workflow__detail">WhatsApp, the website widget, or a WhatsApp ad — 2am on a Sunday included.</p>
-              </li>
+        <!-- PLATE 02 — Lynq: a live handoff, simulated in the browser -------- -->
+        <section class="v2-simwrap" id="lynq-preview">
+          <p class="v2-plate">Plate 02 — Lynq</p>
+          <!--@render:lynqSimulator-->
+        </section>
+        <!--@render:lynqWaitlist-->
 
-              <li class="workflow__step" data-reveal="right" data-reveal-item>
-                <span class="workflow__node" aria-hidden="true">02</span>
-                <h3 class="workflow__title">Lynq answers in seconds</h3>
-                <p class="workflow__detail">From your own brochures and price lists, in the language they wrote in.</p>
-              </li>
-
-              <li class="workflow__step" data-reveal="right" data-reveal-item>
-                <span class="workflow__node" aria-hidden="true">03</span>
-                <h3 class="workflow__title">Details captured automatically</h3>
-                <p class="workflow__detail">Name, budget, and requirement written to your CRM. Nobody types anything.</p>
-              </li>
-
-              <li class="workflow__step" data-reveal="right" data-reveal-item>
-                <span class="workflow__node" aria-hidden="true">04</span>
-                <h3 class="workflow__title">The appointment books itself</h3>
-                <p class="workflow__detail">Checked against your Google Calendar, confirmed to the lead instantly.</p>
-              </li>
-
-              <li class="workflow__step" data-reveal="right" data-reveal-item>
-                <span class="workflow__node" aria-hidden="true">05</span>
-                <h3 class="workflow__title">The lead is scored</h3>
-                <p class="workflow__detail">Hot, Warm, or Cold — from what they actually did, not what they claimed.</p>
-              </li>
-
-              <li class="workflow__step workflow__step--final" data-reveal="right" data-reveal-item>
-                <span class="workflow__node" aria-hidden="true">&#10003;</span>
-                <h3 class="workflow__title">Your closer takes over — warm</h3>
-                <p class="workflow__detail">Alerted the moment it is worth a human, with the full conversation attached.</p>
-              </li>
-            </ol>
+        <!-- 8 · PROJECTS — black, filterable, two big columns --------------- -->
+        <section class="v2-work" data-theme="dark">
+          <div class="v2-work__head">
+            <h2 class="v2-work__title">Our Craft, Your Growth.</h2>
+            <a class="v2-bubble" href="/proof-of-work.html"><span class="v2-bubble__text">View all</span><span class="v2-bubble__arrow" aria-hidden="true">↗</span></a>
           </div>
+          <div data-module="filter">
+            <div class="v2-chips" role="group" aria-label="Filter projects">
+              <!--@render:v2Filters-->
+            </div>
+            <p class="sr-only" role="status" aria-live="polite" data-filter-status></p>
+            <div class="v2-projects" data-filter-grid>
+              <!--@render:v2Projects-->
+            </div>
+            <div data-filter-empty hidden><p class="v2-body v2-grey">No featured projects match — see them all on the Proof of Work page.</p></div>
+          </div>
+          <a class="v2-bubble v2-bubble--large v2-work__all" href="/proof-of-work.html"><span class="v2-bubble__text">View all projects</span><span class="v2-bubble__arrow" aria-hidden="true">↗</span></a>
+          <p class="v2-ask v2-ask--dark">
+            <a class="v2-cta v2-cta--light" href="https://wa.me/919448434344?text=Hi%20Naaz%20AI%20Labs%2C%20I%27d%20like%20a%20quote%20for%20my%20business." target="_blank" rel="noopener noreferrer" data-track="work_whatsapp_quote">Get a quote <span class="v2-arrow" aria-hidden="true">→</span></a>
+          </p>
         </section>
 
-        <!-- ================================================================
-             CAPABILITY — asymmetric editorial split, no card grid
-             ============================================================= -->
-        <section class="section section--ruled">
-          <div class="shell grid12">
-            <div class="col-full md:col-5">
-              <p class="eyebrow" data-reveal="fade">What we do</p>
-              <h2 class="title-1" style="margin-block-start:1.25rem" data-reveal="up">
-                Four disciplines,<br />one delivery team.
-              </h2>
-              <p class="lede" style="margin-block-start:1.5rem" data-reveal="up">
-                We do not hand you off between agencies. Strategy, design, engineering,
-                and the AI layer are the same
-                <a class="link link--accent" href="/about.html">people, in the same room</a>.
-              </p>
-              <a class="btn btn--ghost" href="/process.html" style="margin-block-start:2rem">
-                How we work
-                <span class="btn__arrow" aria-hidden="true">→</span>
-              </a>
+        <!-- 9 · LET'S TALK — glass card on a warm glow ----------------------- -->
+        <section class="v2-talk" id="lets-talk">
+          <div class="v2-talk__glow" aria-hidden="true"></div>
+          <div class="v2-talk__card">
+            <div class="v2-talk__info">
+              <p class="v2-talk__kicker"><span class="v2-dot" aria-hidden="true"></span> Get started</p>
+              <h2 class="v2-talk__heading">Let's build your next business system</h2>
+              <span class="v2-talk__divider" aria-hidden="true"></span>
+              <p class="v2-talk__sub">Turn the way you work into a system that runs itself.</p>
+                            <ul class="v2-socials">
+                <li><a href="https://www.linkedin.com/company/naaz-ai-labs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 10v7" /></svg></a></li>
+                <li><a href="https://www.instagram.com/naazailabs" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="4" /><circle cx="12" cy="12" r="3" /><path d="M16 8v.01" /></svg></a></li>
+                <li><a href="https://wa.me/919448434344" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19l1.2-3.6A7 7 0 1 1 9 18.3z" /></svg></a></li>
+                <li><a href="tel:+916360985934" aria-label="Call +91 63609 85934"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h3l1.5 4-2 1.2a9 9 0 0 0 4.3 4.3l1.2-2 4 1.5v3a2 2 0 0 1-2 2A14 14 0 0 1 4 6a2 2 0 0 1 2-2z" /></svg></a></li>
+              </ul>
+              <a class="v2-talk__email" href="mailto:hello@naazailabs.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2" /><path d="M4 7l8 6 8-6" /></svg>hello@naazailabs.com</a>
             </div>
 
-            <dl class="col-full md:col-6 md:start-7 capability" data-reveal-group>
-              <div class="capability__row" data-reveal="up" data-reveal-item>
-                <dt><span class="mono-meta">01</span><span class="title-3">Artificial Intelligence</span></dt>
-                <dd>Voice agents, chat assistants, document AI, recommendation and prediction — trained on your business, not a generic corpus.</dd>
+            <form class="v2-form" action="/api/contact" method="post" data-contact-form data-module="contactForm">
+              <h3 class="v2-form__title">Let's talk</h3>
+              <div class="field-honeypot" aria-hidden="true">
+                <label for="v2-website">Leave this field empty</label>
+                <input id="v2-website" name="website" type="text" tabindex="-1" autocomplete="off" />
               </div>
-              <div class="capability__row" data-reveal="up" data-reveal-item>
-                <dt><span class="mono-meta">02</span><span class="title-3">CRM Systems</span></dt>
-                <dd>Pipelines, lead scoring, and reporting built around how your team actually sells, then automated end to end.</dd>
-              </div>
-              <div class="capability__row" data-reveal="up" data-reveal-item>
-                <dt><span class="mono-meta">03</span><span class="title-3">Automation</span></dt>
-                <dd>The follow-ups, invoices, confirmations, and handoffs that quietly consume a working week — removed.</dd>
-              </div>
-              <div class="capability__row" data-reveal="up" data-reveal-item>
-                <dt><span class="mono-meta">04</span><span class="title-3">Web Development</span></dt>
-                <dd>Website development that is fast, accessible, and search-visible — engineered to convert, not templates dressed up as bespoke.</dd>
-              </div>
-            </dl>
+              <div class="v2-form__grid">
+                <label class="v2-field"><span class="sr-only">Full name</span><input name="name" type="text" autocomplete="name" placeholder="Your name" required /></label>
+                <label class="v2-field"><span class="sr-only">WhatsApp or phone number</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="WhatsApp / phone number" required /></label>
+                                              </div>
+                                          <button class="v2-send" type="submit">Call me back <span class="v2-arrow" aria-hidden="true">→</span></button>
+                          </form>
           </div>
         </section>
       </main>
 
       <!--@include:footer-->
     </div>
+
+    <div class="v2-bars" data-v2-bars aria-hidden="true"><span></span><span></span><span></span><span></span></div>
   </body>
 </html>

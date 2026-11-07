@@ -187,12 +187,13 @@
 
 .hero__title {
   font-family: var(--font-display);
+  font-weight: 700;
   /* Sized off the container's own (capped) width, not the raw viewport — vw
      alone keeps growing past --container-max on ultra-wide screens, which
      wraps the headline into three lines instead of the two it's balanced for. */
   font-size: clamp(2.25rem, 5cqi + 1.8svh, 5.4rem);
   line-height: 0.9;
-  letter-spacing: -0.045em;
+  letter-spacing: var(--tracking-tighter);
   margin: 0;
   /* Safety net: text-wrap:balance picks its own break points to even out line
      length, and on the narrowest phones that can pick a line the font's own
@@ -251,7 +252,7 @@
 
 .hero__discipline span {
   font-family: var(--font-mono);
-  font-size: 0.5625rem;
+  font-size: 0.625rem;
   letter-spacing: var(--tracking-label);
   color: var(--color-steel-400);
 }
@@ -306,6 +307,7 @@
 
 .page-head__title {
   font-family: var(--font-display);
+  font-weight: 700;
   font-size: var(--text-display);
   line-height: 0.94;
   letter-spacing: var(--tracking-tighter);

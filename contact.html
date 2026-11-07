@@ -27,13 +27,7 @@
                 Let's build your next success story.
               </h1>
             </div>
-            <p class="col-full md:col-4 md:start-9 lede" style="align-self:end" data-reveal="up">
-              Tell us the industry and what is currently not working. Not sure which
-              tier fits? <a class="link link--accent" href="/solutions.html">Compare them here</a>,
-              or check the <a class="link link--accent" href="/faq.html">FAQ</a> for pricing
-              and timelines first. You will get a real scope — tier, timeline, and team —
-              within one business day.
-            </p>
+            <p class="col-full md:col-4 md:start-9 lede" style="align-self:end" data-reveal="up">Fifteen seconds. Scope on screen, then WhatsApp. <a class="link link--accent" href="/faq.html">FAQ</a></p>
           </div>
         </header>
 
@@ -45,17 +39,20 @@
                  that sends the enquiry over SMTP. The action/method here are
                  real, not a JS-only illusion: with JavaScript off this is a
                  native POST and still works, redirected back with ?sent=1 or
-                 ?error=1. data-module="contactForm" upgrades that same
-                 submission to stay on the page when JS is available.
+                 ?error=1. data-module="scopeConfigurator" upgrades that
+                 same submission: URL pre-fill, chips into the message, an
+                 instant scope card and the WhatsApp handoff.
                  ========================================================= -->
             <div data-reveal="up">
               <form
-                class="contact-form"
+                class="contact-form scope"
                 action="/api/contact"
                 method="post"
                 data-contact-form
-                data-module="contactForm"
+                data-module="scopeConfigurator"
               >
+                <p class="scope__banner" data-scope-banner hidden></p>
+
                 <!-- Honeypot: real visitors never see or fill this in; a bot
                      filling every field on the page does. Off-screen rather
                      than display:none, which some bots detect and skip. -->
@@ -64,68 +61,76 @@
                   <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
                 </div>
 
-                <div class="grid12" style="row-gap:0">
-                  <div class="col-full md:col-6 field">
-                    <label for="name">Your name</label>
-                    <input id="name" name="name" type="text" autocomplete="name" required />
+                <fieldset class="scope__group">
+                  <legend><span>01</span> Tap your industry</legend>
+                  <div class="scope__pills">
+                    <label class="scope-pill"><input type="radio" name="industry" value="real-estate" /><span>Real Estate</span></label>
+                    <label class="scope-pill"><input type="radio" name="industry" value="resort" /><span>Resort</span></label>
+                    <label class="scope-pill"><input type="radio" name="industry" value="travel" /><span>Travel Agency</span></label>
+                    <label class="scope-pill"><input type="radio" name="industry" value="crm" /><span>CRM Systems</span></label>
+                    <label class="scope-pill"><input type="radio" name="industry" value="hospitality" /><span>Hospitality</span></label>
+                    <label class="scope-pill"><input type="radio" name="industry" value="finance" /><span>Finance</span></label>
+                    <label class="scope-pill"><input type="radio" name="industry" value="events" /><span>Event Management</span></label>
+                    <label class="scope-pill"><input type="radio" name="industry" value="education" /><span>Education</span></label>
+                    <label class="scope-pill"><input type="radio" name="industry" value="lynq" /><span>Lynq WhatsApp AI</span></label>
+                    <label class="scope-pill"><input type="radio" name="industry" value="other" /><span>Something else</span></label>
                   </div>
+                </fieldset>
 
-                  <div class="col-full md:col-6 field">
-                    <label for="company">Company</label>
-                    <input id="company" name="company" type="text" autocomplete="organization" />
+                <fieldset class="scope__group">
+                  <legend><span>02</span> Tap a scope band</legend>
+                  <div class="scope__pills">
+                    <label class="scope-pill"><input type="radio" name="tier" value="standard" /><span>Standard · Foundation</span></label>
+                    <label class="scope-pill"><input type="radio" name="tier" value="intermediate" /><span>Intermediate · Operations <em>Most popular</em></span></label>
+                    <label class="scope-pill"><input type="radio" name="tier" value="premium" /><span>Premium · Full AI</span></label>
+                    <label class="scope-pill"><input type="radio" name="tier" value="lynq-cohort" /><span>Lynq Monthly Cohort</span></label>
+                    <label class="scope-pill"><input type="radio" name="tier" value="not-sure" /><span>Not sure yet — advise me</span></label>
                   </div>
+                </fieldset>
 
-                  <div class="col-full md:col-6 field">
-                    <label for="email">Email</label>
-                    <input id="email" name="email" type="email" autocomplete="email" required />
+                <fieldset class="scope__group">
+                  <legend><span>03</span> What needs fixing first?</legend>
+                  <div class="scope__pills scope__pills--chips">
+                    <label class="scope-pill"><input type="checkbox" name="bottleneck" value="Leads going cold after hours / slow WhatsApp replies" /><span>Leads going cold after hours / slow WhatsApp replies</span></label>
+                    <label class="scope-pill"><input type="checkbox" name="bottleneck" value="Outdated website that doesn&#39;t capture or convert leads" /><span>Outdated website that doesn&#39;t capture or convert leads</span></label>
+                    <label class="scope-pill"><input type="checkbox" name="bottleneck" value="Sales team not following up properly in a CRM" /><span>Sales team not following up properly in a CRM</span></label>
+                    <label class="scope-pill"><input type="checkbox" name="bottleneck" value="Need AI voice & chat in Indian languages" /><span>Need AI voice & chat in Indian languages</span></label>
                   </div>
-
-                  <div class="col-full md:col-6 field">
-                    <label for="phone">Phone</label>
-                    <input id="phone" name="phone" type="tel" autocomplete="tel" />
+                  <div class="field">
+                    <label for="message">Anything else? <span class="scope__opt">(optional)</span></label>
+                    <!-- Required for a no-JavaScript post; the configurator fills it from the chips. -->
+                    <textarea id="message" name="message" rows="2" required placeholder="A line about your business helps — not required."></textarea>
                   </div>
+                </fieldset>
 
-                  <div class="col-full md:col-6 field">
-                    <label for="industry">Industry</label>
-                    <select id="industry" name="industry" data-industry-select>
-                      <option value="">Select one</option>
-                      <option value="real-estate">Real Estate</option>
-                      <option value="resort">Resort</option>
-                      <option value="travel">Travel Agency</option>
-                      <option value="crm">CRM Systems</option>
-                      <option value="hospitality">Hospitality</option>
-                      <option value="finance">Finance</option>
-                      <option value="events">Event Management</option>
-                      <option value="education">Education</option>
-                      <option value="other">Something else</option>
-                    </select>
+                <fieldset class="scope__group">
+                  <legend><span>04</span> Your coordinates</legend>
+                  <div class="scope__grid">
+                    <div class="field">
+                      <label for="name">Your name</label>
+                      <input id="name" name="name" type="text" autocomplete="name" required />
+                    </div>
+                    <div class="field">
+                      <label for="phone">WhatsApp phone number</label>
+                      <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required />
+                    </div>
+                    <div class="field">
+                      <label for="company">Company</label>
+                      <input id="company" name="company" type="text" autocomplete="organization" />
+                    </div>
+                    <div class="field">
+                      <label for="email">Email</label>
+                      <input id="email" name="email" type="email" autocomplete="email" required />
+                    </div>
                   </div>
+                </fieldset>
 
-                  <div class="col-full md:col-6 field">
-                    <label for="tier">Tier of interest</label>
-                    <select id="tier" name="tier">
-                      <option value="">Not sure yet</option>
-                      <option value="standard">Standard</option>
-                      <option value="intermediate">Intermediate</option>
-                      <option value="premium">Premium</option>
-                    </select>
-                  </div>
+                <label class="scope__auto"><input type="checkbox" data-scope-autowa checked /> Open WhatsApp with my scope as soon as I send</label>
 
-                  <div class="col-full field">
-                    <label for="message">What isn't working right now?</label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      required
-                      placeholder="The more specific, the more useful our first reply will be."
-                    ></textarea>
-                  </div>
-                </div>
-
-                <button class="btn btn--lg" type="submit">
-                  Send enquiry
-                  <span class="btn__arrow" aria-hidden="true">→</span>
+                <button class="v2-cta scope__send" type="submit" data-cta>
+                  Get Scope on WhatsApp &amp; Email <span class="v2-arrow" aria-hidden="true">→</span>
                 </button>
+                <p class="scope__status" data-scope-status role="status" aria-live="polite"></p>
 
                 <p class="mono-meta" style="margin-block-start:1rem">
                   Or email us directly —

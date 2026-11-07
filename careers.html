@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" class="no-js" data-ui="skeuo">
+  <head>
+    <!--@include:head-->
+    <title>Careers — SDE 1, Digital Marketing &amp; Business Development | Naaz AI Labs</title>
+    <meta
+      name="description"
+      content="Join Naaz AI Labs in Bengaluru. Open roles: SDE 1 (Graduate Engineer, Agentic AI), Digital Marketing &amp; Content Executive, and Business Development Associate. Freshers welcome."
+    />
+    <meta property="og:title" content="Careers — Naaz AI Labs" />
+    <meta property="og:description" content="Open roles in engineering, marketing and business development at an AI studio in Bengaluru." />
+    <link rel="canonical" href="https://www.naazailabs.com/careers.html" />
+    <meta property="og:url" content="https://www.naazailabs.com/careers.html" />
+
+    <!--@render:careersSchema-->
+
+    <script type="module" src="/src/js/main.js"></script>
+  </head>
+
+  <body>
+    <!--@include:nav-->
+
+    <div class="page-enter is-ready" data-page>
+      <main id="main">
+        <header class="page-head">
+          <div class="shell grid12">
+            <div class="col-full md:col-8">
+              <p class="page-head__index">Careers · 3 open roles</p>
+              <h1 class="page-head__title" style="margin-block-start:1.5rem" data-module="splitText">
+                Build AI that businesses actually use.
+              </h1>
+            </div>
+            <p class="col-full md:col-4 md:start-9 lede" style="align-self:end" data-reveal="up">
+              We are an AI studio in Bengaluru. We are hiring an engineer, a marketer and a sales
+              associate, all on-site, all open to freshers. Pick a role and send us your resume.
+            </p>
+          </div>
+        </header>
+
+        <section class="section section--flush-top">
+          <div class="shell">
+            <ul class="careers__perks" data-reveal-group>
+              <!--@render:careersPerks-->
+            </ul>
+          </div>
+        </section>
+
+        <section class="section section--flush-top" aria-label="Open roles">
+          <div class="shell">
+            <nav class="careers__jumps" aria-label="Jump to a role">
+          <!--@render:careersNav-->
+            </nav>
+            <div class="careers" data-reveal-group>
+              <!--@render:careers-->
+            </div>
+          </div>
+        </section>
+
+        <section class="section section--flush-top" aria-labelledby="open-title">
+          <div class="shell">
+            <div class="careers-open" id="open-application" data-reveal="up">
+              <div>
+                <p class="eyebrow">Don't see your role?</p>
+                <h2 class="title-1" id="open-title" style="margin-block-start:1rem">
+                  Can't find the role you're interested in? Let us know.
+                </h2>
+                <p class="lede" style="margin-block-start:1rem">
+                  We are a small team and roles open as projects grow. If you are good at something
+                  that is not listed, introduce yourself and we will keep you in mind.
+                </p>
+                <div class="careers__apply" style="margin-block-start:1.75rem">
+                  <!--@render:careersOpen-->
+                </div>
+              </div>
+              <ol class="careers-open__steps">
+                <li><b>1</b><span>Tell us the role you have in mind and what you do best.</span></li>
+                <li><b>2</b><span>Attach your resume and any work: GitHub, portfolio, reels or projects.</span></li>
+                <li><b>3</b><span>We reply if there is a fit now, or keep you on file for when there is.</span></li>
+              </ol>
+            </div>
+            <p class="mono-meta" style="margin-block-start:1.25rem">
+              Salary and joining details are shared during the process. Final-year eligibility depends on your college's placement rules.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <!--@include:footer-->
+    </div>
+  </body>
+</html>

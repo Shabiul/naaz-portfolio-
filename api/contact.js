@@ -50,29 +50,27 @@ export default async function handler(req, res) {
     FIELDS.map((field) => [field, typeof body[field] === 'string' ? body[field].trim() : '']),
   );
 
-  if (!data.name || !data.email || !data.message || !EMAIL_RE.test(data.email)) {
-    const message = 'Please fill in your name, a valid email, and a message.';
+  // A way to reach them is what matters: a valid email or a phone number. The
+  // long form still sends both; the short home form sends a phone and a name.
+  const phoneDigits = data.phone.replace(/\D/g, '');
+  const hasEmail = EMAIL_RE.test(data.email);
+  if (!data.name || (!hasEmail && phoneDigits.length < 7) || (data.email && !hasEmail)) {
+    const message = 'Please fill in your name and a phone number or a valid email.';
     return json
       ? res.status(400).json({ error: message })
       : redirect(res, '/contact.html?error=1');
   }
 
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO_EMAIL } = process.env;
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
-    console.error('[contact] missing SMTP configuration');
-    const message = 'The mail server is not configured yet. Please email us directly at hello@naazailabs.com.';
+  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO_EMAIL, SHEETS_WEBHOOK_URL, SHEETS_SECRET } = process.env;
+  const mailOn = Boolean(SMTP_HOST && SMTP_USER && SMTP_PASS);
+  const sheetOn = Boolean(SHEETS_WEBHOOK_URL);
+  if (!mailOn && !sheetOn) {
+    console.error('[contact] no delivery configured: set SMTP_* and/or SHEETS_WEBHOOK_URL');
+    const message = 'The enquiry form is not configured yet. Please email us directly at hello@naazailabs.com.';
     return json
       ? res.status(500).json({ error: message })
       : redirect(res, '/contact.html?error=1');
   }
-
-  const port = Number(SMTP_PORT || 587);
-  const transporter = nodemailer.createTransport({
-    host: SMTP_HOST,
-    port,
-    secure: port === 465,
-    auth: { user: SMTP_USER, pass: SMTP_PASS },
-  });
 
   const summaryRows = [
     ['Name', data.name],
@@ -87,7 +85,7 @@ export default async function handler(req, res) {
     ...summaryRows.map(([label, value]) => `${label}: ${value}`),
     '',
     "What isn't working right now:",
-    data.message,
+    data.message || '(No message — please call or WhatsApp them back.)',
   ].join('\n');
 
   const html = `
@@ -100,22 +98,49 @@ export default async function handler(req, res) {
         .join('')}
     </table>
     <p style="margin-top:16px"><strong>What isn't working right now:</strong></p>
-    <p>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>
+    <p>${escapeHtml(data.message || '(No message — please call or WhatsApp them back.)').replace(/\n/g, '<br>')}</p>
   `;
 
   const recipientEmail = CONTACT_TO_EMAIL || 'hello@naazailabs.com';
 
-  try {
-    await transporter.sendMail({
+  const sendEmail = () => {
+    const port = Number(SMTP_PORT || 587);
+    const transporter = nodemailer.createTransport({
+      host: SMTP_HOST,
+      port,
+      secure: port === 465,
+      auth: { user: SMTP_USER, pass: SMTP_PASS },
+    });
+    return transporter.sendMail({
       from: `"Naaz AI Labs website" <${SMTP_USER}>`,
       to: recipientEmail,
-      replyTo: `${data.name} <${data.email}>`,
+      ...(hasEmail ? { replyTo: `${data.name} <${data.email}>` } : {}),
       subject: `New enquiry from ${data.name}${data.company ? ` (${data.company})` : ''}`,
       text,
       html,
     });
-  } catch (error) {
-    console.error('[contact] send failed', error);
+  };
+
+  // One row per enquiry in a Google Sheet, through an Apps Script web app
+  // (docs/contact-sheet.gs). Needs no Google credentials here, only its URL.
+  const logToSheet = async () => {
+    const response = await fetch(SHEETS_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: SHEETS_SECRET || '', ...data, page: req.headers.referer || '' }),
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || result.ok !== true) throw new Error(`sheet responded ${response.status} ${result.error || ''}`);
+  };
+
+  // Either route is enough to count as received; a failure in one is logged,
+  // not shown to the visitor, unless both fail.
+  const jobs = [];
+  if (mailOn) jobs.push(['email', sendEmail()]);
+  if (sheetOn) jobs.push(['sheet', logToSheet()]);
+  const results = await Promise.allSettled(jobs.map(([, job]) => job));
+  results.forEach((r, i) => r.status === 'rejected' && console.error(`[contact] ${jobs[i][0]} failed`, r.reason));
+  if (results.every((r) => r.status === 'rejected')) {
     const message = 'Could not send your message. Please email us directly at hello@naazailabs.com.';
     return json
       ? res.status(502).json({ error: message })

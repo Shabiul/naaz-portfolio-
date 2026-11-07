@@ -24,7 +24,7 @@ export function initScroll() {
   }
 
   lenis = new Lenis({
-    duration: 1.1,
+    duration: 0.7,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
     // Touch devices already have momentum scrolling; overriding it feels wrong.
@@ -43,7 +43,7 @@ export function initScroll() {
 /** Programmatic scroll that respects whichever engine is active. */
 export function scrollTo(target, options = {}) {
   if (lenis) {
-    lenis.scrollTo(target, { offset: -80, duration: 1.2, ...options });
+    lenis.scrollTo(target, { offset: -80, duration: 0.8, ...options });
     return;
   }
   const el = typeof target === 'string' ? document.querySelector(target) : target;

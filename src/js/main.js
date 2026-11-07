@@ -7,6 +7,7 @@ import { initLoader, initPageTransitions } from './modules/loader.js';
 import { initReveal, initPathDraw } from './modules/reveal.js';
 import { initTilt } from './modules/tilt.js';
 import { initYear, initContactPrefill, initContactFormResult } from './modules/page-bits.js';
+import { initTracking } from './core/track.js';
 
 /**
  * Boot.
@@ -32,6 +33,7 @@ function boot() {
     initYear();
     initContactPrefill();
     initContactFormResult();
+    initTracking();
 
     // Per-element behaviours, code-split and optionally viewport-gated.
     mountModules();

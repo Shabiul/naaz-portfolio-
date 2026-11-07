@@ -147,11 +147,12 @@
   font-size: var(--text-display);
   line-height: 0.98;
   letter-spacing: var(--tracking-tighter);
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .title-1 {
   font-family: var(--font-display);
+  font-weight: 700;
   font-size: var(--text-h1);
   line-height: 1.02;
   letter-spacing: var(--tracking-tighter);
@@ -159,14 +160,16 @@
 
 .title-2 {
   font-size: var(--text-h2);
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-weight: 700;
   line-height: 1.1;
   letter-spacing: var(--tracking-tight);
 }
 
 .title-3 {
   font-size: var(--text-h3);
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-weight: 700;
   line-height: 1.2;
   letter-spacing: var(--tracking-tight);
 }
@@ -218,7 +221,7 @@
    sits between .lede and .display: large enough to read as a declaration,
    restrained enough not to compete with a page title. */
 .creed {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.35rem);
   line-height: 1.18;
   letter-spacing: var(--tracking-tight);
@@ -227,9 +230,29 @@
   text-wrap: balance;
 }
 
+/* Hand-drawn underline beneath an accent phrase (home page "position" line).
+   The SVG sits absolutely under the words so it never takes a line of its
+   own; the stroke is drawn in by initPathDraw (see motion.css [data-draw]). */
+.ink {
+  position: relative;
+  display: inline-block;
+}
+.ink__line {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: -0.08em;
+  inline-size: 100%;
+  block-size: 0.2em;
+  overflow: visible;
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
 /* Serif italic accent used sparingly inside display lines. */
 .accent-italic {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-style: italic;
   color: var(--color-accent);
 }

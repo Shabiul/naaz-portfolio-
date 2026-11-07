@@ -1,0 +1,908 @@
+/* ============================================================================
+   CONVERSION — the lead-capture layer added on top of the v2 UI
+   Solutions filter bar and tier anchoring, the Lynq founding-cohort bits, the
+   contact scope configurator, and the work-card outcome badges.
+   ========================================================================== */
+
+/* --- Solutions: sticky industry pill bar (industry-filter.js) ------------------ */
+.ind-filter {
+  position: sticky;
+  inset-block-start: max(64px, calc(9 * var(--r)));
+  z-index: 20;
+  display: flex;
+  gap: 8px;
+  margin-block-end: 1.5rem;
+  padding: 10px;
+  overflow-x: auto;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--color-ivory-50) 82%, transparent);
+  box-shadow: inset 0 0 0 1px var(--color-line), var(--shadow-micro);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  scrollbar-width: none;
+}
+.ind-filter::-webkit-scrollbar {
+  display: none;
+}
+.ind-filter__pill {
+  display: inline-flex;
+  flex: none;
+  align-items: baseline;
+  gap: 6px;
+  padding: 9px 16px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-ink);
+  font: 400 14px/1 var(--font-display);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--dur-base) var(--ease-out-soft), color var(--dur-base) var(--ease-out-soft), border-color var(--dur-base) var(--ease-out-soft);
+}
+.ind-filter__pill span {
+  color: var(--color-steel-500);
+  font-size: 11px;
+}
+.ind-filter__pill:hover {
+  border-color: var(--color-steel-500);
+}
+.ind-filter__pill[aria-pressed='true'] {
+  border-color: var(--color-navy-800);
+  background: var(--color-navy-800);
+  color: #f4efe4;
+}
+.industry[hidden] {
+  display: none;
+}
+
+/* --- Tiers: the middle band is the anchor; every card links to its scope ----------- */
+.tier__badge {
+  align-self: flex-start;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--color-steel-500);
+  color: #f4efe4;
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.tier--int {
+  box-shadow: inset 0 0 0 1.5px var(--color-steel-500), var(--shadow-card);
+}
+.tier__anchor {
+  margin: 0.4rem 0 0;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+.tier__cta {
+  margin-block-start: auto;
+  color: var(--color-steel-600);
+  font: 500 var(--text-sm) / 1.3 var(--font-display);
+  text-decoration: none;
+}
+/* Stretched: the whole card is the link. */
+.tier__cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+}
+.tier:has(.tier__cta:focus-visible) {
+  outline: 2px solid var(--color-steel-500);
+  outline-offset: 3px;
+}
+.tier__cta:hover {
+  text-decoration: underline;
+}
+
+/* --- Lynq: founding-cohort status and plan calls to action ---------------------------- */
+.cohort-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 1.25rem 0 0;
+  padding: 8px 14px;
+  border: 1px solid color-mix(in oklab, var(--color-ivory-200) 30%, transparent);
+  border-radius: 999px;
+  font: 500 11px/1.3 var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.cohort-pill__dot {
+  inline-size: 8px;
+  aspect-ratio: 1;
+  flex: none;
+  border-radius: 50%;
+  background: var(--color-steel-500);
+  box-shadow: 0 0 0 0 rgb(94 121 168 / 0.6);
+  animation: cohort-pulse 2s infinite;
+}
+@keyframes cohort-pulse {
+  70% { box-shadow: 0 0 0 10px rgb(94 121 168 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(94 121 168 / 0); }
+}
+.plan__roi {
+  margin: 0.8rem 0 0;
+  padding: 0.7rem 0.9rem;
+  border-inline-start: 2px solid var(--color-steel-500);
+  background: color-mix(in oklab, var(--color-steel-500) 8%, transparent);
+  font: 500 var(--text-sm) / 1.45 var(--font-display);
+}
+.plan__cta.v2-cta {
+  justify-content: center;
+  margin-block-start: auto;
+  padding: 0.95rem 1.2rem;
+  font-size: 12px;
+  line-height: 1.35;
+  text-align: center;
+  white-space: normal;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cohort-pill__dot {
+    animation: none;
+  }
+}
+
+/* --- Contact: the tap-first scope configurator (scope-configurator.js) ----------------- */
+.scope {
+  display: grid;
+  gap: 1.75rem;
+}
+.scope__banner {
+  margin: 0;
+  padding: 0.9rem 1.1rem;
+  border-inline-start: 3px solid var(--color-steel-500);
+  border-radius: var(--radius-sm);
+  background: color-mix(in oklab, var(--color-steel-500) 9%, transparent);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+.scope__banner strong {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+.scope__group {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.scope__group legend {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-block-end: 0.9rem;
+  font: 400 var(--text-h4) / 1.2 var(--font-display);
+}
+.scope__group legend span {
+  color: var(--color-steel-500);
+  font: 500 12px/1 var(--font-mono);
+  letter-spacing: 0.12em;
+}
+.scope__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.scope-pill {
+  position: relative;
+  cursor: pointer;
+}
+.scope-pill input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.scope-pill span {
+  display: inline-block;
+  padding: 11px 16px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 999px;
+  background: var(--color-surface-raised);
+  font: 400 15px/1.2 var(--font-display);
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease, border-color var(--dur-fast) ease;
+}
+.scope-pill em {
+  margin-inline-start: 4px;
+  color: var(--color-steel-500);
+  font-style: normal;
+  font-size: 12px;
+}
+.scope-pill:hover span {
+  border-color: var(--color-steel-500);
+}
+.scope-pill input:checked + span {
+  border-color: var(--color-navy-800);
+  background: var(--color-navy-800);
+  color: #f4efe4;
+}
+.scope-pill input:checked + span em {
+  color: var(--color-steel-300);
+}
+.scope-pill input:focus-visible + span {
+  outline: 2px solid var(--color-steel-500);
+  outline-offset: 2px;
+}
+/* Bottleneck chips read as checkable sentences. */
+.scope__pills--chips .scope-pill span {
+  border-radius: var(--radius-md);
+  text-align: start;
+}
+.scope__pills--chips .scope-pill span::before {
+  content: '+ ';
+  color: var(--color-steel-500);
+}
+.scope__pills--chips .scope-pill input:checked + span::before {
+  content: '✓ ';
+  color: var(--color-steel-300);
+}
+.scope__opt {
+  color: var(--color-ink-faint);
+}
+.scope__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 1.25rem;
+}
+.scope__auto {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+.scope__auto input {
+  inline-size: 1.05rem;
+  block-size: 1.05rem;
+  accent-color: var(--color-steel-500);
+}
+.scope__send.v2-cta {
+  justify-self: start;
+  min-block-size: 3.4rem;
+  padding: 0 1.8rem;
+  font-size: 13px;
+}
+.scope__status {
+  margin: 0;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+@media (max-width: 40rem) {
+  .scope__grid {
+    grid-template-columns: 1fr;
+  }
+  .scope__send.v2-cta {
+    justify-self: stretch;
+  }
+}
+
+/* The preliminary scope card that replaces the form once sent. */
+.scope-card {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-raised);
+  box-shadow: inset 0 0 0 1px var(--color-line), var(--shadow-card);
+  outline: none;
+}
+.scope-card__kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  color: var(--color-steel-500);
+  font: 400 14px/1 var(--font-display);
+}
+.scope-card__title {
+  margin: 0;
+  font: 320 var(--text-h2) / 1.05 var(--font-display);
+}
+.scope-card__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.5rem;
+  margin: 0;
+}
+.scope-card__facts dt {
+  color: var(--color-ink-faint);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.scope-card__facts dd {
+  margin: 0.4rem 0 0;
+  font: 400 var(--text-body-lg) / 1.35 var(--font-display);
+}
+.scope-card__guarantees {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 1rem 0 0;
+  border-block-start: 1px solid var(--color-line);
+  list-style: none;
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+.scope-card__guarantees strong {
+  display: block;
+  color: var(--color-ink);
+  font: 500 var(--text-body) / 1.3 var(--font-display);
+}
+.scope-card__wa.v2-cta {
+  justify-content: center;
+  min-block-size: 3.6rem;
+  font-size: 13px;
+  white-space: normal;
+  text-align: center;
+}
+.scope-card__note {
+  margin: 0;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+@media (max-width: 40rem) {
+  .scope-card__facts,
+  .scope-card__guarantees {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Work: outcome badge and the internal "Build similar" action ---------------------- */
+.project__outcome {
+  align-self: flex-start;
+  margin-block-end: 0.35rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--color-steel-500) 12%, transparent);
+  color: var(--color-steel-700);
+  font: 500 11px/1.2 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.project__links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+}
+.project__similar {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--color-navy-800);
+  color: #f4efe4;
+  font: 500 12px/1.2 var(--font-display);
+  text-decoration: none;
+  transition: background-color var(--dur-fast) ease;
+}
+.project__similar:hover {
+  background: var(--color-steel-500);
+}
+
+/* --- Lynq simulator: channel switch and the voice call (lynq-sim.js) ------------------- */
+.sim__modes {
+  display: inline-flex;
+  gap: 4px;
+  margin-block-end: 14px;
+  padding: 4px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--color-navy-800) 7%, transparent);
+}
+.sim__mode {
+  padding: 9px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-ink-muted);
+  font: 400 14px/1 var(--font-display);
+  cursor: pointer;
+  transition: background-color var(--dur-base) var(--ease-out-soft), color var(--dur-base) var(--ease-out-soft);
+}
+.sim__mode span {
+  color: var(--color-steel-500);
+  font-size: 12px;
+}
+.sim__mode[aria-pressed='true'] {
+  background: #f4efe4;
+  color: var(--color-ink);
+  box-shadow: var(--shadow-micro);
+}
+.sim__log[hidden],
+.sim__call[hidden] {
+  display: none;
+}
+.sim__call {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  justify-items: center;
+  gap: 10px;
+  block-size: 340px;
+  padding: 18px;
+  background: linear-gradient(to bottom, #1a2744, #101b35);
+  color: #f4efe4;
+}
+.sim__call-state {
+  margin: 0;
+  color: rgb(94 121 168 / 0.7);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.sim__orb {
+  display: grid;
+  place-items: center;
+  inline-size: 74px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #a8bad6, #5e79a8 60%, #3a4f76);
+  box-shadow: 0 0 0 0 rgb(94 121 168 / 0.5);
+}
+.sim__call[data-state='ringing'] .sim__orb {
+  animation: sim-ring 1s infinite;
+}
+@keyframes sim-ring {
+  70% { box-shadow: 0 0 0 18px rgb(94 121 168 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(94 121 168 / 0); }
+}
+.sim__wave {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  block-size: 28px;
+}
+.sim__wave i {
+  inline-size: 3px;
+  block-size: 6px;
+  border-radius: 3px;
+  background: #f4efe4;
+  transition: block-size 0.2s ease;
+}
+/* Whoever is talking sets the bars moving: Lynq in white, the caller in amber. */
+.sim__wave[data-who='out'] i,
+.sim__wave[data-who='in'] i {
+  animation: sim-bar 0.8s infinite ease-in-out;
+}
+.sim__wave[data-who='in'] i {
+  background: #dde5f0;
+}
+.sim__wave i:nth-child(2) { animation-delay: -0.6s; }
+.sim__wave i:nth-child(3) { animation-delay: -0.2s; }
+.sim__wave i:nth-child(4) { animation-delay: -0.45s; }
+.sim__wave i:nth-child(5) { animation-delay: -0.1s; }
+.sim__wave i:nth-child(6) { animation-delay: -0.7s; }
+.sim__wave i:nth-child(7) { animation-delay: -0.3s; }
+@keyframes sim-bar {
+  0%, 100% { block-size: 5px; }
+  50% { block-size: 24px; }
+}
+.sim__call-who {
+  margin: 0;
+  color: rgb(94 121 168 / 0.75);
+  font-size: 13px;
+}
+.sim__call-who strong {
+  color: #f4efe4;
+  font-weight: 500;
+}
+.sim__transcript {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  inline-size: 100%;
+  min-block-size: 0;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+.sim__line {
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgb(94 121 168 / 0.08);
+  font-size: 14px;
+  line-height: 1.4;
+  animation: sim-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.sim__line--out {
+  background: rgb(94 121 168 / 0.18);
+}
+.sim__line span {
+  display: block;
+  margin-block-end: 2px;
+  color: rgb(94 121 168 / 0.55);
+  font: 500 10px/1 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.sim__call-actions {
+  display: flex;
+  gap: 8px;
+}
+.sim__call-btn {
+  padding: 8px 14px;
+  border: 1px solid rgb(94 121 168 / 0.3);
+  border-radius: 999px;
+  background: transparent;
+  color: #f4efe4;
+  font: 400 13px/1 var(--font-display);
+  cursor: pointer;
+}
+.sim__call-btn:hover {
+  border-color: #f4efe4;
+}
+.sim__call-btn[hidden] {
+  display: none;
+}
+.sim__actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sim__wave i,
+  .sim__call[data-state='ringing'] .sim__orb,
+  .sim__line {
+    animation: none;
+  }
+}
+
+/* --- Lynq waitlist dialog (waitlist.js) --------------------------------------------- */
+.waitlist {
+  inline-size: min(560px, calc(100vw - 32px));
+  max-block-size: calc(100svh - 32px);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-ivory-50);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-lift);
+}
+.waitlist::backdrop {
+  background: rgb(16 27 53 / 0.45);
+  backdrop-filter: blur(4px);
+}
+.waitlist[open] {
+  animation: waitlist-in 0.45s var(--ease-out-expo);
+}
+@keyframes waitlist-in {
+  from { opacity: 0; translate: 0 16px; }
+}
+.waitlist__form,
+.waitlist__done {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.4rem, 1rem + 2vw, 2.2rem);
+}
+.waitlist__close {
+  position: absolute;
+  inset-block-start: 12px;
+  inset-inline-end: 12px;
+  inline-size: 36px;
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-ivory-300);
+  color: var(--color-ink);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.waitlist__kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--color-steel-500);
+  font: 400 14px/1 var(--font-display);
+}
+.waitlist__title {
+  margin: 0;
+  font: 400 var(--text-h3) / 1.1 var(--font-display);
+}
+.waitlist__lede {
+  margin: 0;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+.waitlist__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+.waitlist__field {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+}
+.waitlist__field em {
+  color: var(--color-ink-faint);
+  font-style: normal;
+}
+.waitlist__field input {
+  padding: 10px 12px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-sm);
+  background: #f4efe4;
+  color: var(--color-ink);
+  font: 400 16px/1.2 var(--font-sans);
+}
+.waitlist__field input:focus {
+  outline: 2px solid var(--color-steel-500);
+  outline-offset: 1px;
+}
+.waitlist__uses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.waitlist__uses legend {
+  margin-block-end: 8px;
+  font: 400 14px/1 var(--font-display);
+}
+.waitlist__send.v2-cta,
+.waitlist__done .v2-cta {
+  justify-content: center;
+  min-block-size: 3.2rem;
+  font-size: 13px;
+}
+.waitlist__status {
+  margin: 0;
+  color: var(--color-ink-muted);
+  font-size: 13px;
+}
+.waitlist-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-block-start: 1rem;
+}
+.waitlist-line .v2-ghost {
+  min-block-size: 2.6rem;
+  padding: 0 1.2rem;
+  font-size: 12px;
+}
+@media (max-width: 30rem) {
+  .waitlist__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================================
+   Home conversion layer: hero ask, price strip, asks between sections,
+   the shorter enquiry form, and the phone action bar (every page).
+   ========================================================================== */
+
+/* Hero: the price line under the buttons, and the work link inside the proof strip. */
+.v2-hero__price {
+  margin: calc(1.8 * var(--r)) 0 calc(1 * var(--r));
+  color: var(--v2-slate);
+  font-family: var(--v2-text);
+  font-size: max(12px, calc(1.7 * var(--r)));
+}
+.v2-hero__price a {
+  color: inherit;
+  text-decoration: none;
+  border-block-end: 1px solid rgb(16 27 53 / 0.3);
+}
+.v2-hero__price b {
+  color: var(--v2-ink);
+  font-weight: 600;
+}
+/* Over the particle sculpture the outline button needs a ground to read on. */
+.v2-hero__ctas .v2-ghost {
+  background: rgb(244 239 228 / 0.72);
+  backdrop-filter: blur(6px);
+}
+.v2-hero__ctas .v2-ghost:hover {
+  background: var(--v2-ink);
+}
+.v2-proof__more {
+  display: block;
+  margin-block-start: calc(0.6 * var(--r));
+  color: var(--v2-ink);
+  text-decoration: none;
+  border-block-end: 1px solid rgb(16 27 53 / 0.3);
+  inline-size: fit-content;
+}
+
+/* Price strip under the guarantees */
+.v2-pack {
+  margin-block-start: calc(7 * var(--r));
+}
+.v2-pack__label {
+  margin: 0 0 calc(2 * var(--r));
+  color: var(--v2-grey);
+  font-family: var(--v2-display);
+  font-size: calc(1.5 * var(--r));
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.v2-pack__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(2 * var(--r));
+}
+.v2-pack__card {
+  display: flex;
+  flex-direction: column;
+  gap: calc(1.1 * var(--r));
+  padding: calc(3 * var(--r));
+  border: 1px solid rgb(16 27 53 / 0.16);
+  border-radius: calc(2 * var(--r));
+  color: var(--v2-ink);
+  text-decoration: none;
+  transition: background-color 0.4s var(--v2-ease), border-color 0.4s var(--v2-ease), transform 0.4s var(--v2-ease);
+}
+.v2-pack__card:hover,
+.v2-pack__card:focus-visible {
+  border-color: var(--v2-ink);
+  background: #f1ebdd;
+  transform: translateY(-2px);
+}
+.v2-pack__tier {
+  font-family: var(--v2-display);
+  font-size: calc(2.2 * var(--r));
+}
+.v2-pack__tier em {
+  color: var(--v2-grey);
+  font-style: normal;
+  font-size: 0.8em;
+  margin-inline-start: 0.4em;
+}
+.v2-pack__price {
+  font-family: var(--v2-display);
+  font-size: calc(5.4 * var(--r));
+  font-weight: 320;
+  line-height: 1;
+}
+.v2-pack__price small {
+  margin-inline-end: 0.2em;
+  color: var(--v2-grey);
+  font-size: 0.32em;
+}
+.v2-pack__fit {
+  color: var(--v2-slate);
+  font-size: calc(1.8 * var(--r));
+  line-height: 1.4;
+}
+.v2-pack__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  margin-block-start: auto;
+  padding-block-start: calc(1.4 * var(--r));
+  border-block-start: 1px solid rgb(16 27 53 / 0.12);
+  color: var(--v2-slate);
+  font-size: calc(1.6 * var(--r));
+}
+.v2-pack__meta b {
+  color: var(--v2-accent);
+  font-weight: 500;
+}
+
+/* A quiet ask between sections */
+.v2-ask {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(2 * var(--r)) calc(3 * var(--r));
+  margin: calc(4 * var(--r)) 0 0;
+}
+.v2-ask__alt {
+  color: var(--v2-slate);
+  font-family: var(--v2-display);
+  font-size: calc(1.8 * var(--r));
+  text-decoration: none;
+  border-block-end: 1px solid rgb(16 27 53 / 0.3);
+}
+.v2-ask--dark {
+  justify-content: center;
+  margin-block-start: calc(6 * var(--r));
+}
+.v2-cta--light {
+  background: #f4efe4;
+  color: var(--v2-ink);
+  box-shadow: none;
+}
+
+/* The shorter form */
+.v2-talk__who {
+  margin: calc(1.6 * var(--r)) 0 0;
+  color: var(--v2-slate);
+  font-family: var(--v2-text);
+  font-size: max(12px, calc(1.6 * var(--r)));
+  line-height: 1.5;
+}
+.v2-form__note {
+  margin: calc(1 * var(--r)) 0 0;
+  color: var(--v2-slate);
+  font-size: max(12px, calc(1.5 * var(--r)));
+}
+
+@media (orientation: portrait) {
+  .v2-pack__grid {
+    grid-template-columns: 1fr;
+  }
+  .v2-pack__price {
+    font-size: calc(9 * var(--r));
+  }
+  .v2-pack__tier {
+    font-size: calc(3 * var(--r));
+  }
+  .v2-pack__fit,
+  .v2-pack__meta {
+    font-size: calc(2.4 * var(--r));
+  }
+  .v2-pack__label {
+    font-size: calc(2.2 * var(--r));
+  }
+  .v2-hero__price,
+  .v2-proof__more {
+    font-size: calc(2.4 * var(--r));
+  }
+}
+
+/* --- Phone action bar (every page, below 64rem) --------------------------------- */
+.v2-dock {
+  display: none;
+}
+@media (max-width: 63.99rem) {
+  .v2-dock {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: 40;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1.3fr;
+    gap: 0.5rem;
+    padding: 0.55rem 0.75rem calc(0.55rem + env(safe-area-inset-bottom));
+    background: rgb(244 239 228 / 0.92);
+    backdrop-filter: blur(14px);
+    border-block-start: 1px solid rgb(16 27 53 / 0.12);
+  }
+  .v2-dock a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-block-size: 2.85rem;
+    border: 1px solid rgb(16 27 53 / 0.25);
+    border-radius: 2rem;
+    color: #101b35;
+    font-family: var(--v2-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .v2-dock a svg {
+    inline-size: 1.1rem;
+    block-size: 1.1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .v2-dock__wa {
+    border-color: #101b35 !important;
+    background: #101b35;
+    color: #f4efe4 !important;
+  }
+  body {
+    padding-block-end: 4.2rem;
+  }
+  /* Out of the way while the full-screen menu or the Lynq dialog is open. */
+  body:has(.v2-menu.is-open) .v2-dock,
+  body:has(dialog[open]) .v2-dock {
+    display: none;
+  }
+}

@@ -9,7 +9,7 @@
 }
 
 .quote__text {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: var(--text-h2);
   line-height: 1.18;
   letter-spacing: var(--tracking-tight);
@@ -17,7 +17,7 @@
 }
 
 .quote__mark {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: 4rem;
   line-height: 0.5;
   color: var(--color-accent);
@@ -43,28 +43,6 @@
   flex-shrink: 0;
 }
 
-/* --- Leadership team grid (About) -------------------------------------- */
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-  border-block-start: 1px solid var(--color-line);
-  padding-block-start: clamp(1.75rem, 1.25rem + 2vw, 2.75rem);
-}
-.team-member .quote__avatar {
-  inline-size: 3rem;
-  block-size: 3rem;
-}
-.team-member .title-3 {
-  margin-block-end: 0.15rem;
-}
-.team-member__tag {
-  margin-block-start: 0.75rem;
-  font-size: var(--text-sm);
-  color: var(--color-ink-muted);
-  max-inline-size: 34ch;
-}
-
 /* --- Logo marquee -------------------------------------------------------- */
 .logo-chip {
   display: inline-flex;
@@ -82,10 +60,46 @@
 }
 
 /* --- Filter bar (work index) --------------------------------------------- */
+/* One labelled row per filter group — Industry, Solution. */
 .filters {
+  display: grid;
+  gap: 1rem;
+}
+
+.filters__group {
+  display: grid;
+  gap: 0.5rem;
+  min-inline-size: 0;
+}
+
+.filters__options {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+@media (min-width: 48rem) {
+  .filters__group {
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    align-items: baseline;
+  }
+}
+
+/* On phones each row scrolls sideways instead of stacking into a wall of
+   pills that pushes the projects off the first screen. */
+@media (max-width: 47.99rem) {
+  .filters__options {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-block: 2px;
+    scrollbar-width: none;
+  }
+  .filters__options::-webkit-scrollbar {
+    display: none;
+  }
+  .filters__options .filter {
+    flex: none;
+  }
 }
 
 .filter {
@@ -315,18 +329,130 @@ body.lightbox-open {
 }
 
 /* --- Pull quote / metric strip ------------------------------------------- */
+/* Cells draw their own right/bottom dividers (the grid closes the top/left),
+   so a cell fading in on scroll never exposes a block of divider colour. */
 .metrics {
   display: grid;
-  gap: 1px;
-  background: var(--color-line);
   grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  border-block-start: 1px solid var(--color-line);
+  border-inline-start: 1px solid var(--color-line);
   border-radius: var(--radius-lg);
   overflow: hidden;
 }
 
 .metric {
   background: var(--color-surface);
+  box-shadow:
+    inset -1px 0 0 var(--color-line),
+    inset 0 -1px 0 var(--color-line);
   padding: clamp(1.25rem, 1rem + 1.5vw, 2rem);
   display: grid;
   gap: 0.3rem;
+}
+
+/* ============================================================================
+   Leadership (About): one full-width section per leader. The founder's portrait
+   slides in from the left, the CTO's from the right, and is wiped open as it
+   arrives. The wipe is on the image INSIDE the frame: an element that is fully
+   clipped counts as invisible to the observer that triggers the reveal, so the
+   frame itself is never clipped.
+   ========================================================================== */
+.leader {
+  padding-block: clamp(5rem, 3rem + 8vw, 11rem);
+  overflow-x: clip; /* the slide-in must not widen the page */
+}
+.leader--cto {
+  background: var(--color-navy-900);
+}
+.leader__grid {
+  display: grid;
+  gap: clamp(2rem, 1rem + 4vw, 4.5rem);
+  align-items: center;
+}
+@media (min-width: 52rem) {
+  .leader--ceo .leader__grid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  }
+  .leader--cto .leader__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  }
+  /* The CTO mirrors the founder: copy on the left, portrait on the right. */
+  .leader--cto .leader__photo {
+    order: 2;
+  }
+  .leader--cto .leader__copy {
+    text-align: end;
+    justify-items: end;
+  }
+}
+.leader__photo {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--color-surface-sunken);
+  box-shadow: 0 2.5rem 5rem -2.5rem color-mix(in oklab, var(--color-navy-800) 55%, transparent);
+}
+.leader--ceo .leader__photo[data-reveal] {
+  transform: translate3d(-14vw, 0, 0);
+}
+.leader--cto .leader__photo[data-reveal] {
+  transform: translate3d(14vw, 0, 0);
+}
+.leader .leader__photo[data-reveal] {
+  transition:
+    opacity 0.9s var(--ease-out-soft),
+    transform 1.3s var(--ease-out-expo);
+}
+.leader .leader__photo[data-reveal].is-revealed {
+  transform: none;
+}
+.leader__photo img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  transform: scale(1.12);
+  transition:
+    transform 1.6s var(--ease-out-expo),
+    clip-path 1.3s var(--ease-out-expo);
+}
+.leader--ceo .leader__photo img {
+  clip-path: inset(0 100% 0 0);
+}
+.leader--cto .leader__photo img {
+  clip-path: inset(0 0 0 100%);
+}
+.leader__photo.is-revealed img {
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+.leader__copy {
+  display: grid;
+  gap: 0.9rem;
+  align-content: center;
+  min-inline-size: 0;
+}
+.leader__name {
+  margin: 0;
+  font-size: clamp(2.6rem, 1.5rem + 4.2vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: var(--tracking-tighter);
+  text-wrap: balance;
+}
+.leader__tag {
+  margin: 0.75rem 0 0;
+  font-size: var(--text-body-lg);
+  line-height: 1.5;
+  color: var(--color-ink-muted);
+  max-inline-size: 26ch;
+}
+@media (prefers-reduced-motion: reduce) {
+  .leader .leader__photo[data-reveal] {
+    transform: none;
+  }
+  .leader__photo img {
+    transform: none;
+    clip-path: none;
+  }
 }

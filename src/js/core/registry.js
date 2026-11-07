@@ -21,6 +21,20 @@ const registry = {
   contactForm: () => import('../modules/contact-form.js'),
   spider: () => import('../modules/spider.js'),
   gallery: () => import('../modules/gallery.js'),
+  servicesMotion: () => import('../modules/services-motion.js'),
+  svcTrack: () => import('../modules/svc-track.js'),
+  // Three.js lives in this chunk alone; only services.html uses it.
+  crystal: () => import('../modules/crystal.js'),
+  // Version 2 home (mdx.so-style).
+  v2Orb: () => import('../modules/v2-orb.js'),
+  v2Beam: () => import('../modules/v2-beam.js'),
+  v2Particles: () => import('../modules/v2-particles.js'),
+  v2Robot: () => import('../modules/v2-robot.js'),
+  lynqSim: () => import('../modules/lynq-sim.js'),
+  industryFilter: () => import('../modules/industry-filter.js'),
+  scopeConfigurator: () => import('../modules/scope-configurator.js'),
+  waitlist: () => import('../modules/waitlist.js'),
+  v2Home: () => import('../modules/v2-home.js'),
 };
 
 const mounted = new WeakMap();

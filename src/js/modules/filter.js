@@ -3,6 +3,11 @@ import { prefersReducedMotion } from '../core/env.js';
 /**
  * Project filtering with FLIP re-ordering.
  *
+ * Buttons come in groups (data-filter-group: industry, solution, tech). One
+ * button per group is active; a project is shown when it matches every
+ * group's active value, read from its data-industry / data-solution /
+ * data-tech attributes. "all" in a group matches everything.
+ *
  * Hiding items makes the survivors jump to new grid positions. FLIP records
  * where each one was, lets the browser lay out the new state, then animates
  * from the old position to the new — so the grid re-flows visibly instead of
@@ -16,15 +21,18 @@ export default function filter(root) {
 
   const items = [...grid.children];
   const liveRegion = root.querySelector('[data-filter-status]');
+  const emptyNote = root.querySelector('[data-filter-empty]');
+  const active = Object.fromEntries(buttons.map((b) => [b.dataset.filterGroup, 'all']));
 
-  function apply(value) {
+  function apply() {
     // FIRST — where is everything now.
     const first = new Map(items.map((item) => [item, item.getBoundingClientRect()]));
 
     let shown = 0;
     for (const item of items) {
-      const tags = (item.dataset.tags ?? '').split(/\s+/);
-      const matches = value === 'all' || tags.includes(value);
+      const matches = Object.entries(active).every(
+        ([group, value]) => value === 'all' || (item.dataset[group] ?? '').split(/\s+/).includes(value),
+      );
       item.hidden = !matches;
       if (matches) shown += 1;
     }
@@ -32,6 +40,7 @@ export default function filter(root) {
     if (liveRegion) {
       liveRegion.textContent = `${shown} project${shown === 1 ? '' : 's'} shown`;
     }
+    if (emptyNote) emptyNote.hidden = shown > 0;
 
     if (prefersReducedMotion) return;
 
@@ -54,10 +63,22 @@ export default function filter(root) {
     }
   }
 
+  function select(group, value) {
+    active[group] = value;
+    for (const b of buttons) {
+      if (b.dataset.filterGroup === group) b.setAttribute('aria-pressed', String(b.dataset.filter === value));
+    }
+  }
+
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
-      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
-      apply(button.dataset.filter);
+      select(button.dataset.filterGroup, button.dataset.filter);
+      apply();
     });
+  });
+
+  root.querySelector('[data-filter-reset]')?.addEventListener('click', () => {
+    for (const group of Object.keys(active)) select(group, 'all');
+    apply();
   });
 }

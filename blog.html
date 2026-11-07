@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" class="no-js" data-ui="skeuo">
+  <head>
+    <!--@include:head-->
+    <title>Blog — AI, Automation, CRM &amp; SEO | Naaz AI Labs</title>
+    <meta
+      name="description"
+      content="Notes from an AI and automation company in Bengaluru on AI agents, WhatsApp automation, websites, CRMs, admin panels and SEO."
+    />
+    <meta property="og:title" content="Blog — Naaz AI Labs" />
+    <meta
+      property="og:description"
+      content="AI agents, automation, websites, CRMs and search visibility — written by the team that builds them."
+    />
+    <link rel="canonical" href="https://www.naazailabs.com/blog.html" />
+    <meta property="og:url" content="https://www.naazailabs.com/blog.html" />
+    <!--@render:blogSchema-->
+    <script type="module" src="/src/js/main.js"></script>
+  </head>
+
+  <body>
+    <!--@include:nav-->
+
+    <div class="page-enter is-ready" data-page>
+      <main id="main">
+        <header class="page-head">
+          <div class="shell grid12">
+            <div class="col-full md:col-8">
+              <p class="page-head__index">Blog · Notes</p>
+              <h1 class="page-head__title" style="margin-block-start:1.5rem" data-module="splitText">
+                What we learn building AI, automation and websites.
+              </h1>
+            </div>
+            <p class="col-full md:col-4 md:start-9 lede" style="align-self:end" data-reveal="up">
+              Written by the team that builds the systems — what an AI agency
+              actually delivers, what it costs, and how to get found on Google
+              and in AI answers.
+            </p>
+          </div>
+        </header>
+
+        <section class="section section--tight">
+          <div class="shell">
+            <div class="post-list" data-reveal-group>
+              <!--@render:blogIndex-->
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!--@include:footer-->
+    </div>
+  </body>
+</html>

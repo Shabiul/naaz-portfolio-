@@ -22,7 +22,7 @@
         "name": "Lynq",
         "applicationCategory": "BusinessApplication",
         "description": "AI automation platform for WhatsApp, website chat, and voice — built by Naaz AI Labs.",
-        "url": "https://lynq.naazailabs.com",
+        "url": "https://www.naazailabs.com/lynq.html",
         "image": "https://www.naazailabs.com/img/work/lynq-platform.jpg",
         "offers": {
           "@type": "AggregateOffer",
@@ -58,22 +58,19 @@
           <div class="shell layer-content grid12">
             <div class="col-full md:col-7">
               <p class="page-head__index">Product · Lynq</p>
+              <p class="cohort-pill" data-reveal="up"><span class="cohort-pill__dot" aria-hidden="true"></span>Private deployment cohort · 4 engineer-managed slots open this month</p>
               <h1 class="page-head__title" style="margin-block-start:1.5rem" data-module="splitText">
                 An AI workforce on your WhatsApp in seven days.
               </h1>
-              <p class="lede" style="margin-block-start:2rem;color:color-mix(in oklab, var(--color-ivory-200) 74%, transparent)" data-reveal="up">
-                Lynq is an AI chatbot and voice agent in one. It answers every message
-                and every call — day or night — from your own documents, qualifies the
-                lead, books the appointment, and hands your team a warm conversation.
-                One flat monthly price. No API bills. Built on the same
-                <a class="link link--accent" href="/technology.html">model-agnostic AI layer</a>
-                behind everything we ship.
-              </p>
+              <p class="lede" style="margin-block-start:2rem;color:color-mix(in oklab, var(--color-ivory-200) 74%, transparent)" data-reveal="up">AI chatbot and voice agent in one. Flat monthly price, no API bills.</p>
 
               <div class="hero__actions" style="margin-block-start:2rem" data-reveal="up">
-                <a class="btn btn--invert btn--lg" href="/contact.html?product=lynq">
-                  Get a demo
+                <a class="btn btn--invert btn--lg" href="/contact.html?product=lynq&amp;tier=waitlist" data-waitlist-open>
+                  Join the waitlist
                   <span class="btn__arrow" aria-hidden="true">→</span>
+                </a>
+                <a class="btn btn--ghost btn--lg" href="/contact.html?product=lynq">
+                  Get a demo
                 </a>
                 <a class="btn btn--ghost btn--lg" href="#plans">
                   See pricing
@@ -93,6 +90,15 @@
         </header>
 
         <!-- ================================================================
+             PREVIEW — the zero-backend handoff simulator (lynq-sim.js)
+             ============================================================= -->
+        <section class="v2-simwrap" id="preview">
+          <p class="v2-plate">Plate 02 — Live handoff, simulated</p>
+          <!--@render:lynqSimulator-->
+        </section>
+        <!--@render:lynqWaitlist-->
+
+        <!-- ================================================================
              THE PROBLEM — stated in the client's words, from the proposal
              ============================================================= -->
         <section class="section section--tight">
@@ -102,12 +108,7 @@
               <p class="display" data-reveal="up" style="max-inline-size:22ch">
                 Leads go cold in 48 hours. Your competitor just replies faster.
               </p>
-              <p class="lede" style="margin-block-start:2rem" data-reveal="up">
-                Not because they are better. Because someone answered at 9pm and you
-                answered at 11am. Every business we work with is losing revenue in that
-                gap — and no amount of team discipline closes it, because the system
-                requires a human to be awake.
-              </p>
+              <p class="lede" style="margin-block-start:2rem" data-reveal="up">Because someone answered at 9pm and you answered at 11am.</p>
             </div>
           </div>
         </section>
@@ -130,37 +131,37 @@
                 <li class="step" data-reveal="up" data-reveal-item>
                   <span class="step__dot" aria-hidden="true"></span>
                   <p class="step__index">01</p>
-                  <p class="step__text">A lead messages your WhatsApp, your website widget, or clicks a WhatsApp ad.</p>
+                  <p class="step__text">A lead messages you.</p>
                 </li>
                 <li class="step" data-reveal="up" data-reveal-item>
                   <span class="step__dot" aria-hidden="true"></span>
                   <p class="step__index">02</p>
-                  <p class="step__text">Lynq replies instantly, answering from your brochures, price lists, and FAQs.</p>
+                  <p class="step__text">Lynq replies instantly, from your documents.</p>
                 </li>
                 <li class="step" data-reveal="up" data-reveal-item>
                   <span class="step__dot" aria-hidden="true"></span>
                   <p class="step__index">03</p>
-                  <p class="step__text">It captures name, phone, budget, and requirement — into your CRM, no typing.</p>
+                  <p class="step__text">Details go straight to your CRM.</p>
                 </li>
                 <li class="step" data-reveal="up" data-reveal-item>
                   <span class="step__dot" aria-hidden="true"></span>
                   <p class="step__index">04</p>
-                  <p class="step__text">If they want to book, it checks your Google Calendar and confirms the slot.</p>
+                  <p class="step__text">It books the slot in your calendar.</p>
                 </li>
                 <li class="step" data-reveal="up" data-reveal-item>
                   <span class="step__dot" aria-hidden="true"></span>
                   <p class="step__index">05</p>
-                  <p class="step__text">For outbound, it dials your lead list on a schedule and qualifies each contact.</p>
+                  <p class="step__text">It dials your leads too.</p>
                 </li>
                 <li class="step" data-reveal="up" data-reveal-item>
                   <span class="step__dot" aria-hidden="true"></span>
                   <p class="step__index">06</p>
-                  <p class="step__text">Every lead is scored Hot, Warm, or Cold in real time from actual behaviour.</p>
+                  <p class="step__text">Every lead is scored Hot, Warm or Cold.</p>
                 </li>
                 <li class="step" data-reveal="up" data-reveal-item>
                   <span class="step__dot" aria-hidden="true"></span>
                   <p class="step__index">07</p>
-                  <p class="step__text">The moment a lead is hot, your agent gets an alert — and a documented history.</p>
+                  <p class="step__text">Hot leads alert your agent instantly.</p>
                 </li>
               </ol>
             </div>
@@ -171,18 +172,20 @@
              PLANS
              ============================================================= -->
         <section class="section" id="plans">
-          <div class="shell">
+          <div class="shell" id="early-access">
             <div class="grid12" style="margin-block-end:3rem">
               <div class="col-full md:col-6">
-                <p class="eyebrow" data-reveal="fade">Pricing</p>
+                <p class="eyebrow" data-reveal="fade">Founding cohort · Early access</p>
                 <h2 class="title-1" style="margin-block-start:1.25rem" data-reveal="up">
                   Flat monthly. No API bills.
                 </h2>
               </div>
               <p class="col-full md:col-4 md:start-8 lede" data-reveal="up">
-                Prices exclude GST. Annual billing saves 15%, and waives setup on the
-                first two plans. No lock-in — monthly plans cancel on 15 days notice.
-                More questions? See the <a class="link link--accent" href="/faq.html">FAQ</a>.
+                Prices exclude GST. No lock-in.
+                <span class="waitlist-line">
+                  Waiting for self-serve?
+                  <a class="v2-ghost" href="/contact.html?product=lynq&amp;tier=waitlist" data-waitlist-open>Join the waitlist</a>
+                </span>
               </p>
             </div>
 
@@ -236,11 +239,7 @@
                 <li class="tier__feature"><span aria-hidden="true">—</span><span>Outbound delivery depends on leads having an active WhatsApp account.</span></li>
                 <li class="tier__feature"><span aria-hidden="true">—</span><span>Results depend on list quality. Verified platform leads outperform old lists, significantly.</span></li>
               </ul>
-              <p class="body-muted" style="font-size:var(--text-sm);margin-block-start:1.5rem" data-reveal="up">
-                We put this on the proposal too. Expectations set badly at the start
-                are the most expensive thing in any engagement. Lynq itself is one of
-                the systems in <a class="link link--accent" href="/work.html">our work</a>.
-              </p>
+              <p class="body-muted" style="font-size:var(--text-sm);margin-block-start:1.5rem" data-reveal="up">Honest expectations. Lynq is in our <a class="link link--accent" href="/proof-of-work.html">proof of work</a>.</p>
             </div>
           </div>
         </section>

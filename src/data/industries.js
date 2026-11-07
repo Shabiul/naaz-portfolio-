@@ -12,8 +12,12 @@
  * ---------------------------------------------------------------------------
  * FILLING IN THE COMMERCIALS
  * ---------------------------------------------------------------------------
- * Each tier accepts three optional fields. Any that is absent renders as a
- * visible <Investment> / <Timeline> / <Team> slot rather than a guess:
+ * Each tier carries three fields — investment, timeline, team. Where no
+ * client-specific quote exists, the tier uses the studio's standard bands
+ * (October 2026): Standard ₹18,000–₹25,000 · 2–3 weeks · 2–3 specialists;
+ * Intermediate ₹32,000–₹45,000 · 4–6 weeks · 3–4 specialists; Premium from
+ * ₹75,000 · 6–10 weeks · 4–6 specialists. A missing field would still render
+ * as a visible slot (render.js), never a guess:
  *
  *   {
  *     name: 'Standard',
@@ -83,6 +87,9 @@ export const industries = [
         name: 'Premium',
         label: 'Intelligence',
         inherits: 'Intermediate',
+        investment: 'From ₹75,000',
+        timeline: '6–10 weeks',
+        team: '4–6 specialists',
         features: [
           'AI voice agent for inbound calls',
           'AI chatbot trained on your inventory',
@@ -114,6 +121,9 @@ export const industries = [
       {
         name: 'Standard',
         label: 'Foundation',
+        investment: '₹18,000 – ₹25,000',
+        timeline: '2–3 weeks',
+        team: '2–3 specialists',
         features: [
           'Luxury brand website',
           'Cinematic gallery',
@@ -128,6 +138,9 @@ export const industries = [
         name: 'Intermediate',
         label: 'Operations',
         inherits: 'Standard',
+        investment: '₹32,000 – ₹45,000',
+        timeline: '4–6 weeks',
+        team: '3–4 specialists',
         features: [
           'Live booking dashboard',
           'Admin panel',
@@ -142,6 +155,9 @@ export const industries = [
         name: 'Premium',
         label: 'Intelligence',
         inherits: 'Intermediate',
+        investment: 'From ₹75,000',
+        timeline: '6–10 weeks',
+        team: '4–6 specialists',
         features: [
           'AI concierge for guest requests',
           'AI receptionist, 24/7',
@@ -172,6 +188,9 @@ export const industries = [
       {
         name: 'Standard',
         label: 'Foundation',
+        investment: '₹18,000 – ₹25,000',
+        timeline: '2–3 weeks',
+        team: '2–3 specialists',
         features: [
           'Travel brand website',
           'Package listings',
@@ -184,6 +203,9 @@ export const industries = [
         name: 'Intermediate',
         label: 'Operations',
         inherits: 'Standard',
+        investment: '₹32,000 – ₹45,000',
+        timeline: '4–6 weeks',
+        team: '3–4 specialists',
         features: [
           'Package management system',
           'Booking engine',
@@ -198,6 +220,9 @@ export const industries = [
         name: 'Premium',
         label: 'Intelligence',
         inherits: 'Intermediate',
+        investment: 'From ₹75,000',
+        timeline: '6–10 weeks',
+        team: '4–6 specialists',
         features: [
           'AI trip planner',
           'AI voice booking agent',
@@ -226,6 +251,9 @@ export const industries = [
       {
         name: 'Standard',
         label: 'Foundation',
+        investment: '₹18,000 – ₹25,000',
+        timeline: '2–3 weeks',
+        team: '2–3 specialists',
         features: [
           'Customer & company records',
           'Lead capture and tracking',
@@ -237,6 +265,9 @@ export const industries = [
         name: 'Intermediate',
         label: 'Operations',
         inherits: 'Standard',
+        investment: '₹32,000 – ₹45,000',
+        timeline: '4–6 weeks',
+        team: '3–4 specialists',
         features: [
           'Workflow automation',
           'Email sequences',
@@ -250,6 +281,9 @@ export const industries = [
         name: 'Premium',
         label: 'Intelligence',
         inherits: 'Intermediate',
+        investment: 'From ₹75,000',
+        timeline: '6–10 weeks',
+        team: '4–6 specialists',
         features: [
           'AI-native CRM assistant',
           'Voice AI for call logging & follow-up',
@@ -277,6 +311,9 @@ export const industries = [
       {
         name: 'Standard',
         label: 'Foundation',
+        investment: '₹18,000 – ₹25,000',
+        timeline: '2–3 weeks',
+        team: '2–3 specialists',
         features: [
           'Property website',
           'Booking enquiry system',
@@ -288,6 +325,9 @@ export const industries = [
         name: 'Intermediate',
         label: 'Operations',
         inherits: 'Standard',
+        investment: '₹32,000 – ₹45,000',
+        timeline: '4–6 weeks',
+        team: '3–4 specialists',
         features: [
           'Guest CRM',
           'Guest-facing dashboard',
@@ -299,6 +339,9 @@ export const industries = [
         name: 'Premium',
         label: 'Intelligence',
         inherits: 'Intermediate',
+        investment: 'From ₹75,000',
+        timeline: '6–10 weeks',
+        team: '4–6 specialists',
         features: [
           'AI receptionist',
           'Voice assistant for guest services',
@@ -325,6 +368,9 @@ export const industries = [
       {
         name: 'Standard',
         label: 'Foundation',
+        investment: '₹18,000 – ₹25,000',
+        timeline: '2–3 weeks',
+        team: '2–3 specialists',
         features: [
           'Corporate website',
           'Product & loan pages',
@@ -336,6 +382,9 @@ export const industries = [
         name: 'Intermediate',
         label: 'Operations',
         inherits: 'Standard',
+        investment: '₹32,000 – ₹45,000',
+        timeline: '4–6 weeks',
+        team: '3–4 specialists',
         features: [
           'CRM for applications',
           'EMI & repayment tooling',
@@ -347,6 +396,9 @@ export const industries = [
         name: 'Premium',
         label: 'Intelligence',
         inherits: 'Intermediate',
+        investment: 'From ₹75,000',
+        timeline: '6–10 weeks',
+        team: '4–6 specialists',
         features: [
           'AI financial assistant',
           'Loan origination automation',
@@ -373,6 +425,9 @@ export const industries = [
       {
         name: 'Standard',
         label: 'Foundation',
+        investment: '₹18,000 – ₹25,000',
+        timeline: '2–3 weeks',
+        team: '2–3 specialists',
         features: [
           'Event website',
           'Gallery & past events',
@@ -384,6 +439,9 @@ export const industries = [
         name: 'Intermediate',
         label: 'Operations',
         inherits: 'Standard',
+        investment: '₹32,000 – ₹45,000',
+        timeline: '4–6 weeks',
+        team: '3–4 specialists',
         features: [
           'Booking management',
           'Client CRM',
@@ -395,6 +453,9 @@ export const industries = [
         name: 'Premium',
         label: 'Intelligence',
         inherits: 'Intermediate',
+        investment: 'From ₹75,000',
+        timeline: '6–10 weeks',
+        team: '4–6 specialists',
         features: [
           'AI event planner & budgeting',
           'Vendor performance dashboard',
@@ -421,6 +482,9 @@ export const industries = [
       {
         name: 'Standard',
         label: 'Foundation',
+        investment: '₹18,000 – ₹25,000',
+        timeline: '2–3 weeks',
+        team: '2–3 specialists',
         features: [
           'Institution website',
           'Course catalogue',
@@ -432,6 +496,9 @@ export const industries = [
         name: 'Intermediate',
         label: 'Operations',
         inherits: 'Standard',
+        investment: '₹32,000 – ₹45,000',
+        timeline: '4–6 weeks',
+        team: '3–4 specialists',
         features: [
           'Student portal',
           'Attendance tracking',
@@ -443,6 +510,9 @@ export const industries = [
         name: 'Premium',
         label: 'Intelligence',
         inherits: 'Intermediate',
+        investment: 'From ₹75,000',
+        timeline: '6–10 weeks',
+        team: '4–6 specialists',
         features: [
           'AI teaching assistant',
           'AI admissions counsellor',

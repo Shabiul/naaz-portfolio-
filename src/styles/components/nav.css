@@ -64,6 +64,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
+  /* Taller tap target; the negative margin keeps the bar's height unchanged. */
+  padding-block: 0.5rem;
+  margin-block: -0.5rem;
   color: inherit;
   text-decoration: none;
   font-weight: 600;
@@ -82,9 +85,17 @@
   flex-direction: column;
   line-height: 1.05;
 }
+/* The brand name itself: Helvetica Bold, uppercase, widely spaced. */
+.nav__brand-text > span:first-child {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-brand);
+  font-size: 0.8125rem;
+}
 .nav__brand-sub {
   font-family: var(--font-mono);
-  font-size: 0.5625rem;
+  font-size: 0.625rem;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   opacity: 0.6;
@@ -98,7 +109,10 @@
   gap: clamp(1.25rem, 2vw, 2.25rem);
 }
 
-@media (min-width: 62rem) {
+/* 72rem (1152px) is the narrowest width at which all nine links and the CTA
+   fit on one line in Helvetica; below it the drawer takes over. Raise it
+   again if a link is added. */
+@media (min-width: 72rem) {
   .nav__links {
     display: flex;
   }
@@ -108,7 +122,9 @@
 }
 
 .nav__link {
+  font-family: var(--font-display);
   position: relative;
+  white-space: nowrap;
   color: inherit;
   text-decoration: none;
   font-size: var(--text-sm);
@@ -147,6 +163,7 @@
 .nav__cta {
   padding: 0.625rem 1.25rem;
   font-size: var(--text-sm);
+  white-space: nowrap;
 }
 
 /* --- Mobile toggle ------------------------------------------------------- */
@@ -226,6 +243,7 @@
   gap: 1rem;
   padding-block: 0.6rem;
   font-family: var(--font-display);
+  font-weight: 700;
   font-size: clamp(2rem, 1rem + 6vw, 3.25rem);
   line-height: 1.05;
   letter-spacing: var(--tracking-tighter);
